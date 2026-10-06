@@ -806,6 +806,14 @@ body>main,body>footer{width:100%!important;max-width:100%!important;margin-left:
 .serviceCard[href="ac-heating.html"]{--service-card-image:url('/assets/image-audit/climate-hero-ai.png')}
 .serviceCard[href="suspension-steering.html"]{--service-card-image:url('/assets/image-audit/suspension-hero-ai.png')}
 .serviceCard[href="wheel-alignment.html"]{--service-card-image:url('/assets/image-audit/alignment-hero-ai.png')}
+.serviceCard[href="/maintenance"]{--service-card-image:url('/assets/image-audit/maintenance-hero-ai-v2.png')}
+.serviceCard[href="/brake-repair"]{--service-card-image:url('/assets/image-audit/brake-hero-ai.png')}
+.serviceCard[href="/diagnostics"]{--service-card-image:url('/assets/image-audit/diagnostics-engine-ai.png')}
+.serviceCard[href="/engine-repair"]{--service-card-image:url('/assets/image-audit/engine-hero-ai.png')}
+.serviceCard[href="/electrical-repair"]{--service-card-image:url('/assets/image-audit/electrical-hero-ai.png')}
+.serviceCard[href="/ac-heating"]{--service-card-image:url('/assets/image-audit/climate-hero-ai.png')}
+.serviceCard[href="/suspension-steering"]{--service-card-image:url('/assets/image-audit/suspension-hero-ai.png')}
+.serviceCard[href="/wheel-alignment"]{--service-card-image:url('/assets/image-audit/alignment-hero-ai.png')}
 
 /* Related-service cards: full-bleed photo with readable copy over it. */
 .serviceFamilyRelated .serviceCard:after{
