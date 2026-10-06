@@ -72,6 +72,9 @@ def enrich(node,base,filename,opt):
         kind=node.get('@type')
         if kind=='AutoRepair':
             node['url']=url(base,'index.html')
+            # The brand mark is a stable, first-party asset. Keep physical-shop
+            # photos and geo coordinates opt-in until the owner supplies them.
+            node.setdefault('logo',asset_url(base,'/assets/jt-logo.png'))
             if opt.business_image: node['image']=opt.business_image
             if opt.latitude is not None: node['geo']={'@type':'GeoCoordinates','latitude':opt.latitude,'longitude':opt.longitude}
             if opt.price_range: node['priceRange']=opt.price_range
