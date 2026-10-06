@@ -28,6 +28,10 @@ for name in PAGES:
                      '<a class="mobileDirections" href="https://www.google.com/maps/dir/')
     if not dock or expected_dock not in dock.group(1):
         errors.append(f'{name}: mobile dock must be Call J&T, phone number, Directions')
+    elif (len(re.findall(r'<a\b', dock.group(1), re.I)) != 3 or
+          'mobileRequest' in dock.group(1) or
+          dock.group(1).count('mobileCallCta') != 1):
+        errors.append(f'{name}: mobile dock must contain exactly three actions (no duplicate call CTA)')
     for actions in re.findall(r'<div class="actions">(.*?)</div>', html, re.S):
         if len(re.findall(r'href="tel:\+14198194069"', actions)) > 1:
             errors.append(f'{name}: duplicate call actions in one decision group')
