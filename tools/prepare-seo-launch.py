@@ -10,10 +10,13 @@ from pathlib import Path
 from urllib.parse import urlparse
 
 ROOT=Path(__file__).resolve().parent.parent
-PUBLIC=['index.html','services.html','about.html','reviews.html','bgsu.html','contact.html','maintenance.html','brake-repair.html','diagnostics.html','engine-repair.html','electrical-repair.html','ac-heating.html','suspension-steering.html','wheel-alignment.html']
+PUBLIC=['index.html','services.html','about.html','reviews.html','bgsu.html','contact.html','privacy.html','maintenance.html','brake-repair.html','diagnostics.html','engine-repair.html','electrical-repair.html','ac-heating.html','suspension-steering.html','wheel-alignment.html']
 DIRECTIVE='index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1'
 SOCIAL_IMAGE='/assets/social-share-jt-auto-service.png'
 SOCIAL_IMAGE_ALT='Dark performance sedan in a clean J&T-style service bay with subtle lime workshop lighting'
+SOCIAL_IMAGE_WIDTH='1734'
+SOCIAL_IMAGE_HEIGHT='907'
+SOCIAL_IMAGE_TYPE='image/png'
 
 def args():
     p=argparse.ArgumentParser(description=__doc__)
@@ -94,6 +97,10 @@ def transform(path,base,opt):
     social_image=asset_url(base,opt.social_image)
     source=tag_with_content(source,'property','og:image',social_image)
     source=tag_with_content(source,'property','og:image:alt',SOCIAL_IMAGE_ALT)
+    source=tag_with_content(source,'property','og:image:secure_url',social_image)
+    source=tag_with_content(source,'property','og:image:type',SOCIAL_IMAGE_TYPE)
+    source=tag_with_content(source,'property','og:image:width',SOCIAL_IMAGE_WIDTH)
+    source=tag_with_content(source,'property','og:image:height',SOCIAL_IMAGE_HEIGHT)
     source=tag_with_content(source,'name','twitter:card','summary_large_image')
     if title: source=tag_with_content(source,'name','twitter:title',title.group(1).strip())
     if description: source=tag_with_content(source,'name','twitter:description',description)

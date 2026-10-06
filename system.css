@@ -796,6 +796,47 @@ body>main,body>footer{width:100%!important;max-width:100%!important;margin-left:
 .serviceFamilyRelated .serviceCard h3{max-width:15ch;margin:14px 0 8px!important;color:#f7f8f5!important;font-size:1.18rem!important}
 .serviceFamilyRelated .serviceCard p{margin:0 0 24px!important;color:#c7cec8!important;line-height:1.5!important}
 .serviceFamilyRelated .serviceCard b{margin-top:auto!important;color:var(--jt-lime)!important;text-transform:uppercase!important;font-size:.72rem!important;letter-spacing:.08em!important}
+
+/* Service cards always earn their footprint with a real repair image. */
+.serviceCard[href="maintenance.html"]{--service-card-image:url('/assets/image-audit/maintenance-hero-ai-v2.png')}
+.serviceCard[href="brake-repair.html"]{--service-card-image:url('/assets/image-audit/brake-hero-ai.png')}
+.serviceCard[href="diagnostics.html"]{--service-card-image:url('/assets/image-audit/diagnostics-engine-ai.png')}
+.serviceCard[href="engine-repair.html"]{--service-card-image:url('/assets/image-audit/engine-hero-ai.png')}
+.serviceCard[href="electrical-repair.html"]{--service-card-image:url('/assets/image-audit/electrical-hero-ai.png')}
+.serviceCard[href="ac-heating.html"]{--service-card-image:url('/assets/image-audit/climate-hero-ai.png')}
+.serviceCard[href="suspension-steering.html"]{--service-card-image:url('/assets/image-audit/suspension-hero-ai.png')}
+.serviceCard[href="wheel-alignment.html"]{--service-card-image:url('/assets/image-audit/alignment-hero-ai.png')}
+
+/* Related-service cards: full-bleed photo with readable copy over it. */
+.serviceFamilyRelated .serviceCard:after{
+  inset:0!important;width:auto!important;opacity:1!important;
+  background-image:linear-gradient(90deg,rgba(8,12,10,.96) 0%,rgba(8,12,10,.8) 43%,rgba(8,12,10,.18) 100%),var(--service-card-image)!important;
+  background-position:center!important;background-size:cover!important;
+  filter:saturate(.78) contrast(1.08) brightness(.8)!important;
+  mask-image:none!important;-webkit-mask-image:none!important;
+}
+.serviceFamilyRelated .serviceCard:before{z-index:2}
+.serviceFamilyRelated .serviceCard>*{z-index:3!important}
+
+/* The services directory uses the same image system—no empty icon tiles. */
+body:has(.servicesConceptHero) .serviceDirectoryGrid .serviceCard{
+  min-height:205px!important;padding:24px 22px!important;isolation:isolate;
+  background:#0c110e!important;
+}
+body:has(.servicesConceptHero) .serviceDirectoryGrid .serviceCard:before{
+  content:""!important;inset:0!important;width:auto!important;height:auto!important;
+  border:0!important;
+  background-image:linear-gradient(90deg,rgba(7,10,8,.96) 0%,rgba(7,10,8,.78) 46%,rgba(7,10,8,.16) 100%),var(--service-card-image)!important;
+  background-position:center!important;background-size:cover!important;
+  opacity:1!important;filter:saturate(.75) contrast(1.06) brightness(.8)!important;
+  z-index:0!important;
+}
+body:has(.servicesConceptHero) .serviceDirectoryGrid .serviceCard:after,
+body:has(.servicesConceptHero) .serviceDirectoryGrid .serviceIcon{display:none!important}
+body:has(.servicesConceptHero) .serviceDirectoryGrid .serviceCard>*{position:relative!important;z-index:1!important}
+body:has(.servicesConceptHero) .serviceDirectoryGrid .serviceCard b{position:static!important;display:block!important;margin:0 0 28px!important}
+body:has(.servicesConceptHero) .serviceDirectoryGrid .serviceCard h3{max-width:13ch!important;margin:0 0 10px!important}
+body:has(.servicesConceptHero) .serviceDirectoryGrid .serviceCard p{max-width:25ch!important}
 .serviceFamilyPage .siteClose.final-cta{padding-top:34px!important;padding-bottom:34px!important;min-height:0!important}
 .serviceFamilyPage .siteClose.final-cta h2.title-pair{max-width:520px!important}
 .serviceDiagnosticsHero~section .title-section>.title-setup{font-size:var(--title-section-setup)!important;line-height:.98!important}
@@ -1149,6 +1190,65 @@ body>main,body>footer{width:100%!important;max-width:100%!important;margin-left:
   }
 }
 
+/* Mobile navigation is a small, deliberate directory rather than a stack of
+   leftover desktop links. The service trigger keeps its compact control while
+   each route gets the same calm, editorial rhythm. */
+@media(max-width:780px){
+  .top nav{
+    counter-reset:mobile-nav;
+    gap:0!important;
+    padding:28px 24px 30px!important;
+    background:
+      radial-gradient(circle at 88% 5%,rgba(121,255,0,.12),transparent 27%),
+      linear-gradient(145deg,#101611 0%,#070a08 66%)!important;
+    border-top:1px solid rgba(121,255,0,.34)!important;
+    border-bottom:1px solid #344039!important;
+    box-shadow:0 22px 42px rgba(0,0,0,.45)!important;
+  }
+  .top nav::before{
+    content:"J&T / BOWLING GREEN, OH";
+    display:block;width:100%;padding:0 0 15px;
+    color:var(--jt-lime);font:900 .62rem/1 var(--ui,Arial,sans-serif);
+    letter-spacing:.18em;
+  }
+  .top nav>.navServices,
+  .top nav>a:not(.navPhone){
+    width:100%;min-height:54px;position:relative;
+    border-bottom:1px solid rgba(128,146,132,.25);
+  }
+  .top nav>.navServices{counter-increment:mobile-nav;padding:8px 0}
+  .top nav>a:not(.navPhone){
+    counter-increment:mobile-nav;display:flex!important;align-items:center;
+    gap:13px;padding:0!important;color:#f7f8f5!important;
+    font-size:clamp(.78rem,3.8vw,.92rem)!important;letter-spacing:.085em!important;
+  }
+  .top nav>a:not(.navPhone)::before,
+  .top nav .servicesNavButton::before{
+    content:"0" counter(mobile-nav);
+    flex:0 0 auto;color:#8d9a8f;font:800 .59rem/1 var(--ui,Arial,sans-serif);
+    letter-spacing:.08em;
+  }
+  .top nav>a:not(.navPhone):hover,
+  .top nav>a:not(.navPhone):focus-visible{color:var(--jt-lime)!important;padding-left:5px!important}
+  .top nav>a:not(.navPhone)::after{display:none!important}
+  .top nav .servicesNavButton{
+    width:100%!important;min-height:38px!important;padding:0!important;
+    border:0!important;border-left:0!important;background:transparent!important;
+    box-shadow:none!important;color:#f7f8f5!important;font-size:clamp(.78rem,3.8vw,.92rem)!important;
+    letter-spacing:.085em!important;
+  }
+  .top nav .servicesNavMark{margin-left:auto}
+  .top nav .navServices.menu-open .servicesNavButton{color:var(--jt-lime)!important}
+  .top nav .navServices.menu-open .servicesMenu{
+    margin:10px 0 0!important;border:1px solid rgba(121,255,0,.42)!important;
+    border-top:3px solid var(--jt-lime)!important;border-radius:0 0 8px 8px;
+    overflow:hidden!important;
+  }
+  .top nav .servicesMenuIntro{padding:20px!important}
+  .top nav .servicesMenuLinks{padding:8px!important}
+  .top nav .servicesMenuLinks a{font-size:.72rem!important;letter-spacing:.06em!important}
+}
+
 /* About proof points need a reading order, not three miniature columns. */
 @media(max-width:760px){
   body:has(.aboutConceptPage) .aboutProofBand{
@@ -1167,4 +1267,66 @@ body>main,body>footer{width:100%!important;max-width:100%!important;margin-left:
   body:has(.aboutConceptPage) .aboutProofLead h2{font-size:clamp(2rem,9vw,2.8rem);line-height:1}
   body:has(.aboutConceptPage) .aboutRating strong{font-size:clamp(3.6rem,18vw,5rem);line-height:1}
   body:has(.aboutConceptPage) .aboutFind h3{font-size:clamp(1.9rem,8vw,2.5rem)}
+}
+
+/* Tactile desktop layer: restrained 3D responds to intent without becoming a
+   gimmick, and all movement disappears for touch and reduced-motion users. */
+@media (hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference){
+  .hero{perspective:1400px;isolation:isolate}
+  .hero>.hero-photo.motion-depth{
+    transform:perspective(1400px) rotateX(var(--depth-y,0deg)) rotateY(var(--depth-x,0deg)) scale(1.035)!important;
+    background-position:calc(50% + var(--image-pan-x,0px)) calc(50% + var(--image-pan-y,0px))!important;
+    transition:transform .52s cubic-bezier(.16,.82,.25,1),background-position .52s cubic-bezier(.16,.82,.25,1)!important;
+  }
+  .hero>.hero-copy{transform:translateZ(42px)}
+  .hero::after{
+    content:"LOCAL / INDEPENDENT";position:absolute;right:clamp(28px,5vw,84px);bottom:105px;z-index:5;
+    padding:10px 13px;border:1px solid rgba(121,255,0,.55);background:rgba(8,12,10,.62);backdrop-filter:blur(9px);
+    color:var(--jt-lime);font:900 .63rem/1 var(--ui,Arial,sans-serif);letter-spacing:.16em;
+    box-shadow:0 12px 30px rgba(0,0,0,.28);transform:translateZ(55px) rotate(-2deg);
+  }
+  .serviceCard.motion-depth{
+    transform-style:preserve-3d;will-change:transform;
+    transition:transform .22s cubic-bezier(.16,.82,.25,1),box-shadow .22s ease,border-color .22s ease!important;
+  }
+  .serviceCard.motion-depth:hover,.serviceCard.motion-depth:focus-visible{
+    transform:perspective(900px) rotateX(var(--depth-y,0deg)) rotateY(var(--depth-x,0deg)) translateY(-6px)!important;
+    border-color:rgba(121,255,0,.8)!important;box-shadow:0 22px 42px rgba(0,0,0,.42),0 0 0 1px rgba(121,255,0,.18)!important;
+  }
+  .serviceCard.motion-depth>*{transform:translateZ(28px)}
+  .serviceFamilyRelated .serviceCard.motion-depth:after{
+    transform:scale(1.075) translate3d(var(--image-pan-x,0px),var(--image-pan-y,0px),0);
+    transition:transform .32s ease,filter .32s ease!important;
+    filter:saturate(.94) contrast(1.1) brightness(.86)!important;
+  }
+  body:has(.servicesConceptHero) .serviceDirectoryGrid .serviceCard.motion-depth:before{
+    transform:scale(1.075) translate3d(var(--image-pan-x,0px),var(--image-pan-y,0px),0);
+    transition:transform .32s ease,filter .32s ease!important;
+    filter:saturate(.98) contrast(1.08) brightness(.88)!important;
+  }
+  .servicesHeroPhoto.motion-depth,.diagnosticHeroPhoto.motion-depth,.campusHeroVisual.motion-depth,.contactHeroImage.motion-depth{
+    box-shadow:0 26px 55px rgba(0,0,0,.34);
+  }
+}
+
+/* The logo intentionally overhangs the compact phone header. Reserve a real
+   clearance lane for the opened menu, then make the menu its own scroll
+   surface so expanding Services never hides Contact or the call action. */
+@media(max-width:780px){
+  .top nav{
+    padding-top:52px!important;
+    padding-bottom:18px!important;
+  }
+  .top nav::before{padding-bottom:18px!important}
+  .top nav.open,
+  .top nav[data-open="true"]{
+    max-height:calc(100dvh - 76px - 58px - env(safe-area-inset-bottom,0px));
+    overflow-y:auto!important;
+    overscroll-behavior:contain;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:thin;
+    scrollbar-color:rgba(121,255,0,.65) rgba(255,255,255,.07);
+  }
+  .top nav.open::-webkit-scrollbar{width:5px}
+  .top nav.open::-webkit-scrollbar-thumb{background:rgba(121,255,0,.65);border-radius:99px}
 }

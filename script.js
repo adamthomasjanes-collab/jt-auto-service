@@ -117,25 +117,31 @@ if (!reducedMotion.matches) {
   });
 
   if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
-    document.querySelectorAll('.servicesHeroPhoto,.diagnosticHeroPhoto,.campusHeroVisual,.contactHeroImage').forEach(el => {
+    document.querySelectorAll('.hero-photo,.servicesHeroPhoto,.diagnosticHeroPhoto,.campusHeroVisual,.contactHeroImage,.serviceCard').forEach(el => {
       el.classList.add('motion-depth');
       el.addEventListener('pointermove', event => {
         const box = el.getBoundingClientRect();
         const x = ((event.clientX - box.left) / box.width - .5) * 2;
         const y = ((event.clientY - box.top) / box.height - .5) * 2;
-        el.style.setProperty('--depth-x', `${x * .65}deg`);
-        el.style.setProperty('--depth-y', `${y * -.65}deg`);
+        const card = el.classList.contains('serviceCard');
+        const tilt = card ? 2.35 : .65;
+        el.style.setProperty('--depth-x', `${x * tilt}deg`);
+        el.style.setProperty('--depth-y', `${y * -tilt}deg`);
+        el.style.setProperty('--image-pan-x', `${x * (card ? 10 : 16)}px`);
+        el.style.setProperty('--image-pan-y', `${y * (card ? 7 : 11)}px`);
       });
       el.addEventListener('pointerleave', () => {
         el.style.removeProperty('--depth-x');
         el.style.removeProperty('--depth-y');
+        el.style.removeProperty('--image-pan-x');
+        el.style.removeProperty('--image-pan-y');
       });
     });
   }
 }
 
-// Keep multi-word local names together in running copy without changing the
-// intentional line breaks in display headings.
+// Keep local proper nouns intact everywhere, including display titles. A
+// place name is one idea: no line should strand "Green" beneath "Bowling".
 const noBreakNames = [
   ['Bowling Green State University', 'Bowling\u00a0Green\u00a0State\u00a0University'],
   ['J&T Auto Service of BG', 'J&T\u00a0Auto\u00a0Service\u00a0of\u00a0BG'],
@@ -148,7 +154,7 @@ const copyNodes = [];
 while (copyWalker.nextNode()) copyNodes.push(copyWalker.currentNode);
 copyNodes.forEach(node => {
   const parent = node.parentElement;
-  if (!parent || parent.closest('script,style,h1,h2,h3,h4,h5,h6')) return;
+  if (!parent || parent.closest('script,style')) return;
   let text = node.nodeValue;
   noBreakNames.forEach(([name, replacement]) => { text = text.split(name).join(replacement); });
   node.nodeValue = text;
