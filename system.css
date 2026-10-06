@@ -1,0 +1,1170 @@
+/* J&T V8.6.29 — canonical customer-facing design system
+   Loaded after styles.css. This file owns shared shell/components so page CSS
+   can concentrate on page-specific composition instead of re-defining them. */
+:root{
+  --jt-black:#070908;--jt-ink:#101311;--jt-paper:#f2f2ee;
+  --jt-lime:#79ff00;--jt-green:#397d00;--jt-orange:#ff7417;
+  --jt-line:#303630;--jt-muted:#c8cec9;
+  --jt-shell:1240px;--jt-gutter:clamp(24px,4vw,48px);
+  --jt-focus:0 0 0 3px #070908,0 0 0 6px #79ff00;
+}
+/* Shared shell */
+.top{height:92px;min-height:92px;padding:0 var(--jt-gutter);display:flex;align-items:center;gap:28px;background:#050706;border-bottom:1px solid #242a25;position:sticky;top:0;z-index:1000;isolation:isolate}
+.top .brand{width:188px;min-width:188px;align-self:stretch;display:flex;align-items:center;position:relative;z-index:2}
+.top .brand img{display:block;width:188px;height:auto;max-height:118px;object-fit:contain;background:transparent!important;border:0!important;border-radius:0!important;filter:drop-shadow(0 6px 12px rgba(0,0,0,.28))}
+.top nav{margin-left:auto;display:flex;align-items:center;gap:30px;height:100%}
+.top nav a{color:#fff;text-decoration:none;text-transform:uppercase;font-weight:900;font-size:.76rem;letter-spacing:.035em;position:relative;white-space:nowrap}
+.top nav a:hover,.top nav a:focus-visible{color:var(--jt-lime)}
+.top nav a[aria-current="page"]:after{content:"";position:absolute;left:0;right:0;bottom:-12px;height:2px;background:var(--jt-orange)}
+.top .navPhone{color:var(--jt-lime)}
+.menu{display:none}
+/* One conversion-button contract. Orange = action. */
+.cta,.btn.btn-orange{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 24px;background:var(--jt-orange);border:2px solid var(--jt-orange);color:#090b09!important;text-decoration:none;text-transform:uppercase;font-weight:950;letter-spacing:.045em;line-height:1;transition:transform .16s ease,background .16s ease,border-color .16s ease}
+.cta:hover,.cta:focus-visible,.btn.btn-orange:hover,.btn.btn-orange:focus-visible{background:#fff;border-color:#fff;color:#090b09!important;transform:translateY(-1px)}
+.cta.small,.desktop-cta{min-height:46px;padding:0 22px;font-size:.72rem}
+.secondary,.btn.btn-outline{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 22px;background:transparent;border:2px solid #e5e8e5;color:#fff!important;text-decoration:none;text-transform:uppercase;font-weight:900;letter-spacing:.035em;line-height:1;transition:background .16s ease,color .16s ease,border-color .16s ease}
+.secondary:hover,.secondary:focus-visible,.btn.btn-outline:hover,.btn.btn-outline:focus-visible{background:#fff;color:#090b09!important;border-color:#fff}
+/* On light surfaces, secondary actions invert cleanly. */
+:is(.aboutStoryBand,.vehicleFit,.section.light,.lightSection) :is(.secondary,.btn.btn-outline){border-color:#555;color:#111!important}
+:is(.aboutStoryBand,.vehicleFit,.section.light,.lightSection) :is(.secondary,.btn.btn-outline):hover,
+:is(.aboutStoryBand,.vehicleFit,.section.light,.lightSection) :is(.secondary,.btn.btn-outline):focus-visible{background:#111;color:#fff!important;border-color:#111}
+.actions{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+/* Shared type rhythm */
+.eyebrow{text-transform:uppercase;font-weight:950;letter-spacing:.17em;font-size:.69rem;line-height:1.25}
+.title-pair{margin:0}.title-pair span{display:block}.title-setup{color:inherit}.title-payoff{color:var(--jt-lime)}
+/* A title may gain a line as its panel narrows, but it must never draw through
+   another column.  This is a desktop and mobile contract for every title pair. */
+.title-pair{min-width:0;max-width:100%}
+.title-pair>.title-setup,.title-pair>.title-payoff{
+  min-width:0;max-width:100%;white-space:normal!important;
+  overflow-wrap:normal!important;word-break:normal!important;
+}
+/* Shared footer: deliberately utility-sized. */
+body>footer{max-width:none!important;margin:0!important;padding:30px max(var(--jt-gutter),calc((100vw - var(--jt-shell))/2)) 26px!important;display:grid!important;grid-template-columns:minmax(320px,1fr) auto!important;column-gap:48px!important;row-gap:18px!important;align-items:center!important;background:#050706!important;color:#fff!important;border-top:1px solid #2d332e!important}
+body>footer .footerBrand{display:flex!important;align-items:center!important;gap:22px!important;min-width:0}
+body>footer .footerBrand img{display:block!important;width:auto!important;height:auto!important;max-width:128px!important;max-height:78px!important;background:transparent!important;border:0!important;border-radius:0!important;object-fit:contain!important}
+body>footer .footerBrand strong{font-weight:950;text-transform:uppercase;letter-spacing:.025em}
+body>footer .footerBrand p{margin:3px 0 0;color:#cbd1cc;font-size:.84rem;line-height:1.35}
+body>footer .footerBrand .footerHours{margin-top:7px;color:#f0f3ef;font-size:.76rem;font-weight:800}
+body>footer a{color:inherit;text-decoration:none}body>footer a:hover,body>footer a:focus-visible{color:var(--jt-lime)}
+body>footer .footerLinks{display:flex!important;align-items:center!important;justify-content:flex-end!important;gap:20px!important;flex-wrap:wrap!important}
+body>footer .footerLinks a{text-transform:uppercase;font-weight:900;font-size:.72rem;letter-spacing:.035em;white-space:nowrap}
+body>footer>.fine{grid-column:1/-1!important;margin:0!important;color:#7f8981!important;font-size:.68rem!important;line-height:1.4!important}
+/* Keyboard contract */
+a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:none;box-shadow:var(--jt-focus)}
+/* Mobile action dock is one shared component. */
+.mobileBar{display:none}
+@media(max-width:1050px){
+ .top{gap:18px}.top nav{gap:19px}.top .brand,.top .brand img{width:158px;min-width:158px}
+}
+@media(max-width:780px){
+ .top{height:76px;min-height:76px;padding:0 20px}.top .brand,.top .brand img{width:132px;min-width:132px}.desktop-cta{display:none!important}
+ .menu{display:inline-flex;margin-left:auto;background:transparent;border:1px solid #465047;color:#fff;padding:9px 12px;font-weight:900;text-transform:uppercase}
+ .top nav{display:none;position:absolute;left:0;right:0;top:76px;height:auto;margin:0;padding:18px 24px 24px;background:#080b09;border-top:1px solid #242a25;border-bottom:1px solid #303630;flex-direction:column;align-items:flex-start;gap:18px}
+ .top nav.open,.top nav[data-open="true"]{display:flex}.top nav a[aria-current="page"]:after{bottom:-5px}
+ body>footer{grid-template-columns:1fr!important;padding-left:24px!important;padding-right:24px!important;padding-bottom:78px!important}
+ body>footer .footerLinks{justify-content:flex-start!important}.mobileBar{position:fixed;display:grid;grid-template-columns:repeat(3,1fr);left:0;right:0;bottom:0;z-index:80;background:#050706;border-top:1px solid #394039}
+ .mobileBar a{min-height:54px;display:flex;align-items:center;justify-content:center;color:#fff;text-decoration:none;text-transform:uppercase;font-weight:950;font-size:.72rem;border-right:1px solid #303630}.mobileBar a:nth-child(2){background:var(--jt-orange);color:#080909}.mobileBar a:last-child{border-right:0}
+}
+@media(prefers-reduced-motion:reduce){.cta,.btn,.secondary{transition:none!important;transform:none!important}}
+
+/* Sticky-header anchor protection */
+html{scroll-padding-top:108px}
+@media(max-width:780px){html{scroll-padding-top:90px}}
+
+/* V8.6.34 — surface contracts + overflow guardrails
+   Shared QA protection: light surfaces explicitly own dark title/action text;
+   dark surfaces explicitly own light title text. */
+:is(.aboutStoryBand,.aboutProofBand,.vehicleFit,.section.light,.lightSection){color:#111411}
+:is(.aboutStoryBand,.aboutProofBand,.vehicleFit,.section.light,.lightSection) :is(.title-setup,h1,h2,h3){color:#111411}
+:is(.aboutStoryBand,.aboutProofBand,.vehicleFit,.section.light,.lightSection) .title-payoff{color:var(--jt-green)}
+:is(.aboutConceptHero,.aboutValuesBand,.section.dark,.darkSection){color:#f7f8f5}
+:is(.aboutConceptHero,.aboutValuesBand,.section.dark,.darkSection) .title-setup{color:#f7f8f5}
+:is(.aboutConceptHero,.aboutValuesBand,.section.dark,.darkSection) .title-payoff{color:var(--jt-lime)}
+img,svg,video,iframe{max-width:100%}
+
+/* V8.6.38 — semantic surface contract
+   Any component declaring surface-light/surface-dark gets safe typography by default.
+   This prevents page-specific sections from inheriting legacy title colors. */
+.surface-light{color:#111411!important}
+.surface-light :is(h1,h2,h3,h4,h5,h6,.title-setup){color:#111411!important}
+.surface-light .title-payoff{color:var(--jt-green)!important}
+.surface-light .eyebrow{color:var(--jt-green)!important}
+.surface-light :is(.secondary,.btn.btn-outline){border-color:#555!important;color:#111411!important}
+.surface-light :is(.secondary,.btn.btn-outline):hover,
+.surface-light :is(.secondary,.btn.btn-outline):focus-visible{background:#111411!important;border-color:#111411!important;color:#fff!important}
+.surface-dark{color:#f7f8f5!important}
+.surface-dark :is(h1,h2,h3,h4,h5,h6,.title-setup){color:#f7f8f5!important}
+.surface-dark .title-payoff{color:var(--jt-lime)!important}
+.surface-dark .eyebrow{color:#f7f8f5!important}
+
+/* V8.6.41 — universal pre-footer closing chapter
+   Every customer-facing page ends with the same structural composition:
+   page-specific conversion copy on the left + location/directions on the right. */
+.siteClose.final-cta{
+  width:100%;max-width:none!important;margin:0!important;
+  padding:clamp(58px,5vw,78px) max(var(--jt-gutter),calc((100vw - var(--jt-shell))/2))!important;
+  display:grid!important;grid-template-columns:minmax(0,1.35fr) minmax(290px,.65fr)!important;
+  gap:clamp(44px,6vw,82px)!important;align-items:center!important;
+  background:#101411!important;color:#f7f8f5!important;border-top:1px solid #303630!important;
+}
+.siteClose>div{min-width:0}.siteClose .eyebrow{margin:0 0 13px;color:#f7f8f5!important}
+.siteClose h2{margin:0 0 16px!important;font-size:clamp(2.55rem,4vw,4.65rem)!important;line-height:.9!important;max-width:850px}
+.siteClose h2 .title-setup{color:#f7f8f5!important}.siteClose h2 .title-payoff{color:var(--jt-lime)!important}
+.siteClose>div>p:not(.eyebrow){max-width:720px;margin:0;color:#cbd2cc!important;font-size:1rem;line-height:1.55}
+.siteClose .actions{margin-top:22px}
+.siteClose aside{min-width:0;border-left:1px solid #3b423c!important;padding:30px 0 30px clamp(30px,4vw,52px)!important}
+.siteClose aside span{display:block;color:#cbd2cc!important;font-size:.68rem;font-weight:950;letter-spacing:.17em;text-transform:uppercase}
+.siteClose aside strong{display:block;margin:14px 0 6px;color:#fff!important;font:950 clamp(1.8rem,2.4vw,2.35rem)/1 var(--display,Arial,sans-serif)}
+.siteClose aside p{margin:0 0 15px;color:#cbd2cc!important}
+.siteClose aside a{color:var(--jt-lime)!important;text-decoration:none;text-transform:uppercase;font-size:.74rem;font-weight:950;letter-spacing:.035em}
+.siteClose aside a:hover,.siteClose aside a:focus-visible{color:#fff!important}
+@media(max-width:780px){
+  .siteClose.final-cta{grid-template-columns:1fr!important;gap:30px!important;padding:52px 24px!important}
+  .siteClose aside{border-left:0!important;border-top:1px solid #3b423c!important;padding:26px 0 0!important}
+  .siteClose .actions>a{flex:1 1 190px}
+}
+
+/* V8.6.42 — redundancy audit: footer is identity/navigation only */
+.footerBrand > div > p:last-child{margin-bottom:0}
+
+/* V8.6.43 — expanded information architecture / service navigation */
+.top nav{gap:24px}
+.navServices{height:100%;display:flex;align-items:center;position:relative;gap:5px}
+.navServices>a{display:flex;align-items:center;height:100%}
+.servicesToggle{width:25px;height:25px;display:inline-grid;place-items:center;padding:0;border:0;background:transparent;color:var(--jt-lime);font:950 1rem/1 Arial,sans-serif;cursor:pointer;transition:transform .16s ease,color .16s ease}
+.navServices:hover .servicesToggle,.navServices:focus-within .servicesToggle,.navServices.menu-open .servicesToggle{color:#fff;transform:rotate(45deg)}
+.servicesMenu{position:absolute;left:-24px;top:calc(100% - 1px);width:min(680px,72vw);display:grid;grid-template-columns:210px 1fr;background:#0b0e0c;border:1px solid #303630;border-top:3px solid var(--jt-lime);box-shadow:0 18px 36px rgba(0,0,0,.34);opacity:0;visibility:hidden;transform:translateY(8px);pointer-events:none;transition:opacity .16s ease,transform .16s ease,visibility .16s ease;z-index:1100}
+.navServices:hover .servicesMenu,.navServices:focus-within .servicesMenu,.navServices.menu-open .servicesMenu{opacity:1;visibility:visible;transform:none;pointer-events:auto}
+.servicesMenuIntro{padding:28px 24px;background:#111612;border-right:1px solid #303630;display:flex;flex-direction:column;align-items:flex-start;justify-content:center}
+.servicesMenuIntro span{font-size:.62rem;font-weight:950;letter-spacing:.16em;color:var(--jt-lime)}
+.servicesMenuIntro strong{margin:10px 0 18px;color:#fff;font-size:1.35rem;line-height:1.02;text-transform:uppercase}
+.servicesMenuIntro a{height:auto!important;color:#fff!important;font-size:.67rem!important;border-bottom:1px solid var(--jt-orange);padding-bottom:4px}
+.servicesMenuLinks{display:grid;grid-template-columns:1fr 1fr;padding:14px}
+.top nav .servicesMenuLinks a{height:auto;padding:12px 14px;border-bottom:1px solid #252b26;color:#e9ece9;font-size:.69rem;letter-spacing:.02em}
+.top nav .servicesMenuLinks a:hover,.top nav .servicesMenuLinks a:focus-visible{background:#151a16;color:var(--jt-lime)}
+.top nav .servicesMenuLinks a[aria-current="page"]{color:var(--jt-lime)}
+.top nav .servicesMenuLinks a[aria-current="page"]:after{display:none}
+.top nav .servicesMenuSymptom{grid-column:1/-1;color:var(--jt-lime)!important;border-bottom:0!important;margin-top:4px}
+@media(max-width:1120px){.top nav{gap:16px}.top nav a{font-size:.7rem}.top .brand,.top .brand img{width:150px;min-width:150px}.cta.small,.desktop-cta{padding-left:16px;padding-right:16px}}
+@media(max-width:780px){
+ .navServices{height:auto;width:100%;display:grid;grid-template-columns:1fr auto;gap:0}
+ .navServices>a{height:auto!important;padding:0!important}
+ .servicesToggle{width:38px;height:32px;border:1px solid #394039}
+ .servicesMenu{position:static;grid-column:1/-1;width:100%;display:none;grid-template-columns:1fr;margin-top:12px;opacity:1;visibility:visible;transform:none;pointer-events:auto;box-shadow:none;border:1px solid #303630;border-top:2px solid var(--jt-lime)}
+ .navServices.menu-open .servicesMenu{display:grid}
+ .navServices:hover:not(.menu-open) .servicesMenu{display:none}
+ .servicesMenuIntro{padding:18px;border-right:0;border-bottom:1px solid #303630}
+ .servicesMenuIntro strong{font-size:1.05rem;margin:7px 0 12px}
+ .servicesMenuLinks{grid-template-columns:1fr;padding:8px}
+ .top nav .servicesMenuLinks a{padding:11px 10px}
+ .top nav .servicesMenuSymptom{grid-column:auto}
+}
+
+/* V8.6.44 — Services nav is a click-controlled menu, not a hover trap. */
+.navServices{position:relative}
+.servicesNavButton{
+  height:100%;display:inline-flex;align-items:center;gap:8px;padding:0;border:0;background:transparent;
+  color:#f7f8f5;font:950 .72rem/1 var(--ui,Arial,sans-serif);letter-spacing:.025em;text-transform:uppercase;cursor:pointer;position:relative;
+}
+.servicesNavButton::after{content:"";position:absolute;left:0;right:0;bottom:18px;height:2px;background:var(--jt-orange);transform:scaleX(0);transform-origin:left;transition:transform .16s ease}
+.servicesNavButton:hover,.servicesNavButton:focus-visible,.navServices.menu-open .servicesNavButton{color:#fff}
+.servicesNavButton.active::after,.navServices.menu-open .servicesNavButton::after{transform:scaleX(1)}
+.servicesNavMark{color:var(--jt-lime);font:950 1rem/1 Arial,sans-serif;transition:transform .16s ease,color .16s ease}
+.navServices.menu-open .servicesNavMark{transform:rotate(45deg);color:#fff}
+/* Important: opening is controlled by JS. Merely hovering/focusing the Services control does not reveal a panel below the bar. */
+.navServices:hover .servicesMenu,.navServices:focus-within .servicesMenu{opacity:0;visibility:hidden;transform:translateY(8px);pointer-events:none}
+.navServices.menu-open .servicesMenu{opacity:1;visibility:visible;transform:none;pointer-events:auto}
+@media(max-width:780px){
+ .servicesNavButton{width:100%;height:auto!important;justify-content:space-between;padding:0!important;text-align:left}
+ .servicesNavButton::after{display:none}
+ .servicesNavMark{width:38px;height:32px;display:grid;place-items:center;border:1px solid #394039}
+ .navServices.menu-open .servicesMenu{display:grid}
+}
+
+/* Navigation active-state alignment */
+.servicesNavButton{height:auto!important;align-self:center}
+.servicesNavButton::after{bottom:-12px!important}
+
+/* Reviews split hero — canonical implementation.
+   The left panel owns the hero. The right panel is supporting evidence.
+   Both panels size from their own available width and stack before either becomes cramped. */
+.reviewsHeroInner{grid-template-columns:minmax(0,1fr) minmax(440px,.85fr)}
+.reviewsHeroCopy{container-type:inline-size;overflow:hidden;min-width:0}
+.reviewsHeroCopy>.eyebrow,
+.reviewsVoiceHero .voiceKicker{
+  color:var(--jt-lime)!important;
+  font-size:.72rem!important;
+  line-height:1.2!important;
+  letter-spacing:.16em!important;
+  font-weight:900!important;
+  text-transform:uppercase!important;
+}
+.reviewsHeroCopy h1.title-hero{
+  width:100%;max-width:100%;min-width:0;
+  font-family:var(--display,Impact,sans-serif)!important;
+  font-size:inherit!important;
+  line-height:.9!important;
+  letter-spacing:-.045em!important;
+  text-transform:uppercase;
+}
+.reviewsHeroCopy h1.title-hero>.title-setup,
+.reviewsHeroCopy h1.title-hero>.title-payoff{
+  display:block;width:100%;max-width:100%;
+  white-space:normal!important;
+  overflow-wrap:normal!important;
+  word-break:normal!important;
+  text-wrap:pretty!important;
+}
+.reviewsHeroCopy h1.title-hero>.title-setup{
+  color:#f2f2ee!important;
+  font-size:clamp(2.7rem,10.4cqi,4.15rem)!important;
+  line-height:.94!important;
+}
+.reviewsHeroCopy h1.title-hero>.title-payoff{
+  color:var(--jt-lime)!important;
+  font-size:clamp(3rem,11.25cqi,4.55rem)!important;
+  line-height:.9!important;
+}
+.reviewsVoiceHero{
+  position:relative;container-type:inline-size;overflow:hidden;min-width:0;
+  border-left:1px solid #29312b;
+  background:linear-gradient(145deg,#101612,#080a09 72%);
+  padding:72px clamp(42px,5vw,78px);
+  display:flex;flex-direction:column;justify-content:center;
+}
+.reviewsVoiceHero::before{
+  content:"";position:absolute;inset:0;
+  background:repeating-linear-gradient(120deg,transparent 0 58px,rgba(255,255,255,.018) 59px 60px),linear-gradient(110deg,rgba(121,255,0,.05),transparent 46%);
+  pointer-events:none;
+}
+.reviewsVoiceHero::after{
+  content:"";position:absolute;left:clamp(42px,5vw,78px);right:8%;top:112px;height:1px;
+  background:linear-gradient(90deg,var(--jt-lime),rgba(121,255,0,.12),transparent);
+}
+.voiceKicker,.voiceFoot,.voiceWords{position:relative;z-index:1}
+.voiceKicker{max-width:360px}
+.voiceQuote{position:absolute;right:6%;top:4%;color:var(--jt-lime);opacity:.09;font:900 15rem/.8 Georgia,serif;pointer-events:none}
+.voiceWords{display:grid;gap:5px;margin-top:48px;width:100%;max-width:100%;min-width:0}
+.reviewsVoiceHero .voiceWords strong{
+  display:block;max-width:100%;margin:0!important;padding:0!important;
+  color:#f2f2ee!important;
+  font:900 clamp(1.65rem,7.5cqi,2.45rem)/.92 var(--display,Impact,sans-serif)!important;
+  letter-spacing:-.025em!important;text-transform:uppercase;
+  white-space:normal!important;overflow-wrap:normal;word-break:normal;text-wrap:balance;
+}
+.reviewsVoiceHero .voiceWords strong:last-child{color:var(--jt-lime)!important}
+.voiceFoot{margin-top:28px;color:#9da69f;font-size:.7rem;font-weight:850;letter-spacing:.09em;text-transform:uppercase}
+.reviewSignalStatement{display:grid;grid-template-columns:1fr 1fr;min-width:0}
+.reviewSignalStatement strong{display:flex;align-items:center;min-height:120px;padding:24px 34px;border-left:1px solid #29312b;color:#f4f5f1;font:950 clamp(1.55rem,2.3vw,2.7rem)/.92 var(--display,Arial,sans-serif);letter-spacing:-.025em;text-transform:uppercase}
+.reviewSignalStatement strong:last-child{color:var(--jt-lime)}
+
+@media(max-width:1180px){
+  .reviewsHeroInner{grid-template-columns:1fr}
+  .reviewsHeroCopy{overflow:visible;padding:64px max(32px,calc((100vw - 1100px)/2))}
+  .reviewsHeroCopy h1.title-hero>.title-setup{font-size:clamp(2.65rem,6.1vw,4.15rem)!important}
+  .reviewsHeroCopy h1.title-hero>.title-payoff{font-size:clamp(3rem,6.8vw,4.55rem)!important}
+  .reviewsVoiceHero{border-left:0;border-top:1px solid #29312b;min-height:350px;padding:54px max(32px,calc((100vw - 1100px)/2))}
+  .reviewsVoiceHero::after{left:max(32px,calc((100vw - 1100px)/2));right:max(32px,calc((100vw - 1100px)/2))}
+  .voiceWords{max-width:900px}
+  .reviewsVoiceHero .voiceWords strong{font-size:clamp(1.6rem,4.5vw,2.35rem)!important}
+}
+@media(max-width:620px){
+  .reviewsHeroCopy{padding:58px 24px}
+  .reviewsHeroCopy h1.title-hero>.title-setup{font-size:clamp(2.15rem,10vw,3.2rem)!important}
+  .reviewsHeroCopy h1.title-hero>.title-payoff{font-size:clamp(2.5rem,11.5vw,3.65rem)!important}
+  .reviewsVoiceHero{padding:52px 24px;min-height:330px}
+  .reviewsVoiceHero::after{left:24px;right:24px;top:90px}
+  .voiceWords{margin-top:38px}
+  .reviewsVoiceHero .voiceWords strong{font-size:clamp(1.45rem,7.2vw,2.05rem)!important}
+  .voiceFoot{margin-top:26px}
+  .reviewSignalStatement{grid-template-columns:1fr}
+  .reviewSignalStatement strong{min-height:auto;padding:22px 24px;border-left:0;border-top:1px solid #29312b}
+}
+
+/* Global responsive containment */
+html,body{max-width:100%;overflow-x:clip}
+*,*::before,*::after{box-sizing:border-box}
+img,svg,video,canvas,iframe{max-width:100%}
+main,section,article,aside,header,footer,nav,div{min-width:0}
+:is(h1,h2,h3,h4,h5,h6,p,a,strong,span){overflow-wrap:break-word}
+
+/* V8.6.48 — Reviews visual-break pass: signal map + review-ticket artifacts */
+.reviewSignalMap{padding:82px max(42px,calc((100vw - 1240px)/2));display:grid;grid-template-columns:minmax(260px,.62fr) minmax(0,1.6fr);gap:clamp(48px,6vw,92px);align-items:center;background:#f3f3ee}
+.signalMapIntro{max-width:390px}.signalMapIntro .eyebrow{color:#397d00}.signalMapIntro h2{margin:13px 0 18px;font-size:clamp(2.45rem,3.5vw,3.8rem);line-height:.88}.signalMapIntro>p:last-child{max-width:340px;color:#4a524b;line-height:1.55}
+.signalMap{position:relative;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border:1px solid #c5cbc4;background:#eceee9;isolation:isolate}
+.signalMap:before{content:"";position:absolute;left:10%;right:10%;top:70px;height:2px;background:linear-gradient(90deg,#397d00 0 12%,#a8b0a8 12% 33%,#397d00 33% 45%,#a8b0a8 45% 66%,#397d00 66% 78%,#a8b0a8 78%);z-index:-1}
+.signalMap article{position:relative;min-height:285px;padding:30px 24px 26px;border-right:1px solid #c5cbc4;background:linear-gradient(180deg,rgba(255,255,255,.62),rgba(255,255,255,.16));display:flex;flex-direction:column;align-items:flex-start}.signalMap article:last-child{border-right:0}
+.signalIcon{width:76px;height:76px;display:grid;place-items:center;border:2px solid #397d00;background:#f3f3ee;box-shadow:0 0 0 8px #eceee9;margin-bottom:32px}.signalIcon svg{width:42px;height:42px;fill:none;stroke:#397d00;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+.signalMap article>span{color:#397d00;font:900 .66rem/1 var(--ui);letter-spacing:.12em}.signalMap h3{margin:12px 0 9px;font:950 1.18rem/.95 var(--display);text-transform:uppercase;color:#111}.signalMap p{margin:0;color:#555d56;font-size:.88rem;line-height:1.45}
+.reviewVoicesHead{margin-bottom:36px}.reviewVoicesHead>p{max-width:300px}
+.reviewTicketGrid{position:relative;z-index:1;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;align-items:stretch}
+.reviewTicket{position:relative;min-height:360px;padding:0;background:#f2f1e9;color:#111;display:flex;flex-direction:column;clip-path:polygon(0 0,100% 0,100% calc(100% - 16px),calc(100% - 16px) 100%,0 100%);box-shadow:inset 0 0 0 1px #c8c9c1;overflow:hidden}
+.reviewTicket:before{content:"";position:absolute;left:0;right:0;top:49px;border-top:1px dashed #9da29b}.reviewTicket:after{content:"REVIEW";position:absolute;right:-8px;bottom:38px;font:950 4.8rem/.75 var(--display);color:rgba(17,20,17,.045);transform:rotate(-90deg);transform-origin:bottom right;pointer-events:none}
+.reviewTicket.featured{transform:translateY(-12px);box-shadow:inset 0 0 0 2px #79ff00}.reviewTicket.featured .ticketTop{background:#79ff00;color:#071007}.reviewTicket.featured .ticketTop b{color:#071007}
+.ticketTop,.ticketBottom{display:flex;justify-content:space-between;gap:16px;align-items:center;padding:17px 20px;font:900 .62rem/1 var(--ui);letter-spacing:.09em;text-transform:uppercase}.ticketTop{background:#e3e5df}.ticketTop b{color:#397d00}.ticketStars,.ticketSignal{margin:34px 24px 0;color:#397d00;font:950 1rem/1 var(--ui);letter-spacing:.08em}.ticketSignal{font-size:.76rem;border:1px solid #397d00;padding:8px 10px;width:max-content}
+.reviewTicket blockquote{margin:24px 24px 30px;font:850 clamp(1.45rem,1.8vw,1.9rem)/1.14 var(--display);letter-spacing:-.02em;max-width:90%}.ticketBottom{margin-top:auto;border-top:1px dashed #9da29b;padding:18px 20px}.ticketBottom span{color:#6a716a}.ticketBottom a{color:#255d00;text-decoration:none}.ticketBottom a:hover,.ticketBottom a:focus-visible{text-decoration:underline;text-underline-offset:4px}
+.reviewTransparency{padding-top:72px;padding-bottom:72px}.reviewTransparencyCopy h2{font-size:clamp(2.45rem,3.4vw,3.8rem)}
+@media(max-width:1040px){.reviewSignalMap{grid-template-columns:1fr}.signalMapIntro{max-width:680px}.signalMap{grid-template-columns:repeat(2,1fr)}.signalMap:before{display:none}.signalMap article:nth-child(2){border-right:0}.signalMap article:nth-child(-n+2){border-bottom:1px solid #c5cbc4}.reviewTicketGrid{grid-template-columns:1fr}.reviewTicket{min-height:285px}.reviewTicket.featured{transform:none}}
+@media(max-width:620px){.reviewSignalMap{padding:60px 24px}.signalMap{grid-template-columns:1fr}.signalMap article{min-height:220px;border-right:0;border-bottom:1px solid #c5cbc4}.signalMap article:last-child{border-bottom:0}.signalIcon{width:64px;height:64px;margin-bottom:24px}.reviewTicketGrid{gap:16px}.reviewTicket{min-height:280px}.ticketTop,.ticketBottom{align-items:flex-start;flex-direction:column;gap:7px}.reviewTicket blockquote{font-size:1.45rem}}
+
+/* V8.6.49 — UNIVERSAL STICKY NAV CONTRACT
+   Customer-facing navigation must remain visible at every scroll position on every page.
+   Use fixed positioning instead of sticky so ancestor overflow/layout rules cannot disable it. */
+html,body{overflow-x:clip}
+body{padding-top:92px!important}
+body>.top{
+  position:fixed!important;
+  top:0!important;
+  left:0!important;
+  right:0!important;
+  width:100%!important;
+  z-index:5000!important;
+}
+@media(max-width:780px){
+  body{padding-top:76px!important}
+  body>.top{height:76px!important;min-height:76px!important}
+}
+
+/* V8.6.50 — Review signal containment QA
+   Four-up cards are only used when the section has enough real horizontal room.
+   Never force long labels against a divider just to preserve a desktop column count. */
+.signalMap article{min-width:0}
+.signalMap h3{max-width:100%;font-size:clamp(1rem,1.05vw,1.12rem);overflow-wrap:normal;word-break:normal}
+@media (max-width:1280px){
+  .reviewSignalMap{grid-template-columns:1fr;gap:38px}
+  .signalMapIntro{max-width:680px}
+  .signalMap article{padding-inline:22px}
+}
+@media (max-width:900px){
+  .signalMap{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .signalMap:before{display:none}
+  .signalMap article:nth-child(2){border-right:0}
+  .signalMap article:nth-child(-n+2){border-bottom:1px solid #c5cbc4}
+}
+@media (max-width:620px){
+  .signalMap{grid-template-columns:1fr}
+  .signalMap article:nth-child(n){border-right:0}
+}
+
+/* V8.6.57 — CANONICAL FOOTER LOCATION CONTRACT
+   The footer owns the street address at the bottom of every customer-facing page.
+   Pre-footer conversion chapters should not repeat the street address in the same viewport. */
+body>footer .footerAddress{
+  margin:8px 0 0!important;
+  color:#aeb7b0!important;
+  font-style:normal!important;
+  font-size:.76rem!important;
+  line-height:1.45!important;
+  letter-spacing:.01em!important;
+}
+
+/* V8.6.58 — BGSU universal title-scale contract
+   BGSU section titles use the same site-wide title-section tokens as every other customer-facing page.
+   Page-specific composition may position titles, but may not invent a larger section-title scale. */
+body:has(.campusHero) :is(.handoffIntro,.symptomIntro,.studentSafety,.parentPanelLead,.requestGuide) h2.title-section{
+  font-family:var(--display,Impact,sans-serif)!important;
+  font-style:normal!important;
+  line-height:.93!important;
+  letter-spacing:-.025em!important;
+  text-transform:uppercase;
+  font-size:inherit!important;
+}
+body:has(.campusHero) :is(.handoffIntro,.symptomIntro,.studentSafety,.parentPanelLead,.requestGuide) h2.title-section>.title-setup{
+  display:block;
+  font-size:var(--title-section-setup)!important;
+  line-height:.96!important;
+}
+body:has(.campusHero) :is(.handoffIntro,.symptomIntro,.studentSafety,.parentPanelLead,.requestGuide) h2.title-section>.title-payoff{
+  display:block;
+  font-size:var(--title-section-payoff)!important;
+  line-height:.92!important;
+}
+/* Supporting visual headlines are subordinate to true section titles. */
+body:has(.campusHero) .studentShopMessage>strong{
+  font-size:var(--title-section-setup)!important;
+  line-height:.96!important;
+  letter-spacing:-.02em!important;
+}
+/* The three-scenario bridge is a component, not a second title system. */
+body:has(.campusHero) .distanceVoice blockquote{font-size:clamp(1.45rem,1.85vw,2rem)!important;line-height:1.02!important}
+body:has(.campusHero) .distanceAnswer>strong{font-size:clamp(1.65rem,2.15vw,2.35rem)!important;line-height:.96!important}
+
+
+/* BGSU hero hierarchy: the campus image is supporting context, never a second hero. */
+body:has(.campusHero) .campusHeroVisual:after{
+  background:linear-gradient(90deg,rgba(5,8,5,.28),rgba(5,8,5,.03) 54%,rgba(5,8,5,.08)),linear-gradient(0deg,rgba(5,8,5,.78) 0%,rgba(5,8,5,.34) 28%,transparent 58%)!important;
+}
+body:has(.campusHero) .campusHeroVisual figcaption{max-width:390px!important;bottom:clamp(30px,4vw,54px)!important}
+body:has(.campusHero) .campusHeroVisual figcaption span{margin-bottom:8px!important;color:#8cff2a!important}
+body:has(.campusHero) .campusHeroVisual figcaption strong{font:900 clamp(1.75rem,2.25vw,2.65rem)/.94 var(--display,Impact,sans-serif)!important;color:#fff!important;text-transform:uppercase!important}
+body:has(.campusHero) .campusHeroVisual figcaption b{margin-top:7px!important;font:800 clamp(1rem,1.2vw,1.25rem)/1.12 Arial,sans-serif!important;letter-spacing:.01em!important;color:#8cff2a!important;text-transform:none!important}
+body:has(.campusHero) .campusHeroCopy .lightFine{margin-top:12px!important;color:#aeb6af!important;font-size:.76rem!important;line-height:1.35!important}
+/* The BGSU setup is deliberately concise enough to make two confident lines
+   in the fixed copy panel.  It must not inherit the old campus display scale. */
+body:has(.campusHero) .campusHeroCopy h1.title-pair{max-width:100%!important;min-width:0!important}
+body:has(.campusHero) .campusHeroCopy h1.title-pair>.title-setup{
+  font-size:clamp(2.35rem,2.25vw,3rem)!important;
+  line-height:.92!important;white-space:normal!important;
+}
+body:has(.campusHero) .campusHeroCopy h1.title-pair>.title-payoff{
+  font-size:clamp(3rem,3.4vw,4rem)!important;
+  line-height:.9!important;white-space:normal!important;
+}
+@media(max-width:620px){
+  body:has(.campusHero) .campusHeroVisual figcaption{max-width:300px!important}
+  body:has(.campusHero) .campusHeroVisual figcaption strong{font-size:clamp(1.6rem,8vw,2.15rem)!important}
+  body:has(.campusHero) .campusHeroVisual figcaption b{font-size:.95rem!important}
+}
+
+/* V8.6.67 — CONTACT CANONICAL SYSTEM
+   Consolidates the V8.6.63–.66 StoryBrand, composition, contrast and responsive passes.
+   Contact follows one contract: problem -> easy start -> useful details -> shop logistics -> reassurance -> action. */
+body:has(.contactConceptHero) :is(.contactConceptHeroCopy,.contactRequestChapter,.contactShopCopy,.contactFaq){min-width:0}
+body:has(.contactConceptHero) :is(.contactConceptHero,.contactRequestChapter,.contactShopChapter,.contactFaq) :is(.title-setup,.title-payoff){overflow-wrap:normal;word-break:normal;hyphens:none}
+
+/* Hero — copy leads; shop image is supporting proof. */
+body:has(.contactConceptHero) .contactConceptHero{padding:0!important;background:#070a08;color:#f7f8f5}
+.contactConceptHeroInner{display:grid;grid-template-columns:minmax(520px,.94fr) minmax(0,1.06fr);min-height:540px;border-bottom:1px solid #2a302b}
+.contactConceptHeroCopy{display:flex;flex-direction:column;justify-content:center;padding:clamp(58px,5vw,82px) clamp(42px,5.5vw,88px);background:linear-gradient(135deg,#080b09,#0d120e)}
+.contactConceptHeroCopy .eyebrow{color:#b8c2ba!important}
+.contactConceptHeroCopy h1{margin:0;max-width:650px}
+.contactConceptHeroCopy .title-setup{color:#f7f8f5!important}
+.contactConceptHeroCopy .title-payoff{color:var(--jt-lime)!important}
+.contactConceptHeroCopy .lede{max-width:570px;margin-top:22px;color:#d6dbd7!important;font-size:clamp(1rem,1.15vw,1.12rem);line-height:1.55}
+.contactConceptHeroCopy .actions{margin-top:28px}
+.contactHeroImage{position:relative;margin:0;min-height:540px;overflow:hidden;background:#101511}
+.contactHeroImage:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(5,8,6,.28),transparent 45%),linear-gradient(0deg,rgba(5,8,6,.65),transparent 45%);pointer-events:none}
+.contactHeroImage img{width:100%;height:100%;object-fit:cover;object-position:center 54%;display:block}
+.contactHeroImage figcaption{position:absolute;z-index:2;left:clamp(26px,3vw,44px);bottom:clamp(26px,3vw,40px)}
+.contactHeroImage figcaption span{display:block;color:var(--jt-lime);font:900 .68rem/1 var(--ui);letter-spacing:.12em}
+.contactHeroImage figcaption strong{display:block;margin-top:7px;color:#fff!important;font:900 1.45rem/1 var(--display);letter-spacing:-.02em}
+
+/* Three low-friction ways to start. */
+.contactStartPaths{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));width:min(1240px,calc(100% - 64px));margin:32px auto;background:#0b0f0c;border:1px solid #313832;color:#f7f8f5}
+.contactStartPaths a{position:relative;display:grid;grid-template-columns:54px 1fr 20px;grid-template-rows:auto auto;gap:6px 16px;min-width:0;padding:27px 28px;border-right:1px solid #313832;text-decoration:none;color:#f7f8f5!important}
+.contactStartPaths a:last-child{border-right:0}
+.contactStartPaths a:hover,.contactStartPaths a:focus-visible{background:#121812}
+.contactStartPaths a:focus-visible{outline:3px solid var(--orange);outline-offset:-4px}
+.contactPathIcon{grid-row:1/3;width:44px;height:44px;display:grid;place-items:center;border:1px solid #5a695c;color:var(--jt-lime);font:900 .7rem/1 var(--ui)}
+.contactPathOrange{border-color:#8d4a1d;color:var(--orange)}
+.contactStartPaths strong{font:900 clamp(1rem,1.15vw,1.16rem)/1.02 var(--display);text-transform:uppercase;color:#f7f8f5!important}
+.contactStartPaths small{max-width:290px;color:#b9c2bb!important;line-height:1.4}
+.contactStartPaths b{grid-column:3;grid-row:1/3;align-self:center;color:var(--jt-lime)!important}
+
+/* Request chapter — intentionally light; form is a preparation tool, not a fake submission. */
+.contactRequestChapter{width:100%;padding:clamp(72px,7vw,104px) max(32px,calc((100vw - 1240px)/2))!important;grid-template-columns:minmax(0,.86fr) minmax(480px,1.04fr)!important;gap:clamp(48px,6vw,78px)!important;align-items:start;background:#f3f3ee!important;border-top:1px solid #d1d5cf!important}
+.contactRequestChapter:before{display:none!important}
+.contactRequestChapter .requestGuide{position:sticky!important;top:108px!important;padding-top:0}
+.contactRequestChapter .eyebrow{color:#397d00!important}
+.contactRequestChapter h2.title-section>.title-setup{color:#111411!important}
+.contactRequestChapter h2.title-section>.title-payoff{color:#397d00!important}
+.contactRequestChapter .requestLead{max-width:560px;color:#4a524b!important;font-size:1rem;line-height:1.6}
+.contactPlan{margin-top:30px;border-top:1px solid #c8cdc7!important}
+.contactPlan article{display:grid;grid-template-columns:42px 1fr;gap:14px;padding:19px 0;border-bottom:1px solid #c8cdc7!important}
+.contactPlan b{color:#b94b00!important;font-size:.68rem;letter-spacing:.14em}
+.contactPlan strong{display:block;color:#111411!important}
+.contactPlan span{display:block;margin-top:3px;color:#59615a!important;font-size:.86rem;line-height:1.4}
+.contactRequestChapter .requestPrompt{margin-top:28px;background:#e7e9e3!important;border-left-color:var(--orange)!important}
+.contactRequestChapter .requestPrompt span{color:#111411!important}
+.contactRequestChapter .requestPrompt a{color:#7c3500!important;text-underline-offset:3px}
+.contactRequestChapter .requestPrompt a:hover,.contactRequestChapter .requestPrompt a:focus-visible{text-decoration:underline}
+.contactNotesForm{width:100%;max-width:650px;justify-self:end;padding:clamp(26px,3vw,36px)!important;border:1px solid #d2d6d0;border-top:5px solid var(--orange)!important;box-shadow:0 20px 48px rgba(13,17,14,.11)}
+.contactNotesForm .formHeader p{margin:7px 0 0;color:#5c645d;font-size:.86rem;line-height:1.45}
+.contactNotesForm :is(input,textarea){font-size:16px}
+.contactNotesForm :is(input,textarea):focus{outline:3px solid rgba(57,125,0,.28);outline-offset:1px;border-color:#397d00}
+.contactNotesForm .choiceRow input:focus-visible+span{outline:3px solid rgba(57,125,0,.32);outline-offset:2px}
+.contactNotesForm .cta{width:100%;justify-content:center}
+.contactNotesForm .requestCall{display:flex;justify-content:center;margin-top:10px}
+.contactNotesForm .formFine{margin-bottom:0}
+
+/* Shop logistics — direct, scannable, no repeated street address immediately above the canonical footer. */
+.contactShopChapter{display:grid;grid-template-columns:minmax(440px,.88fr) minmax(0,1.12fr);gap:0;padding:0!important;background:#080b09;color:#f7f8f5}
+.contactShopCopy{padding:clamp(66px,6vw,92px) clamp(42px,6vw,92px)}
+.contactShopCopy .eyebrow{color:#b8c2ba!important}
+.contactShopCopy .title-setup{color:#f7f8f5!important}
+.contactShopCopy .title-payoff{color:var(--jt-lime)!important}
+.contactShopCopy>p{max-width:520px;margin-top:18px;color:#c7cec8!important;line-height:1.55}
+.contactShopFacts{display:grid;grid-template-columns:1fr 1fr;margin:30px 0;border-top:1px solid #303731;border-bottom:1px solid #303731}
+.contactShopFacts article{padding:20px 18px 20px 0}
+.contactShopFacts article+article{border-left:1px solid #303731;padding-left:22px}
+.contactShopFacts span{display:block;color:var(--jt-lime);font:900 .65rem/1 var(--ui);letter-spacing:.12em}
+.contactShopFacts strong{display:block;margin-top:8px;color:#f7f8f5!important;font:900 1.15rem/1 var(--display)}
+.contactShopFacts p{margin:6px 0 0;color:#b9c2bb!important;font-size:.85rem}
+.contactMap{width:100%;height:100%;min-height:500px;border:0;filter:saturate(.75) contrast(1.02)}
+
+/* FAQ — two-column editorial grouping rather than a four-card wall. */
+.contactFaq{padding:clamp(70px,7vw,96px) max(32px,calc((100vw - 1240px)/2))!important;background:#f3f3ee}
+.contactFaqHead,.contactFaqGrid{max-width:none;margin-left:0;margin-right:0}
+.contactFaqHead{max-width:760px;margin-bottom:34px}
+.contactFaqHead .eyebrow{color:#397d00!important}
+.contactFaqHead h2{margin-bottom:0}
+.contactFaqGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));border:1px solid #c9cec8;background:#f7f7f3}
+.contactFaqGrid article{min-height:190px;padding:30px;border-right:1px solid #c9cec8;border-bottom:1px solid #c9cec8}
+.contactFaqGrid article:nth-child(2n){border-right:0}
+.contactFaqGrid article:nth-last-child(-n+2){border-bottom:0}
+.contactFaqGrid span{color:#397d00;font:900 .66rem/1 var(--ui);letter-spacing:.12em}
+.contactFaqGrid strong{display:block;margin:20px 0 10px;color:#111;font:900 clamp(1.1rem,1.35vw,1.3rem)/1.05 var(--display);text-transform:uppercase}
+.contactFaqGrid p{max-width:470px;margin:0;color:#505851;line-height:1.5;font-size:.92rem}
+
+/* Closing chapter — one dominant action; dark-surface ownership is explicit. */
+body:has(.contactConceptHero) .siteClose{color:#f7f8f5}
+body:has(.contactConceptHero) .siteClose :is(h1,h2,h3,strong){color:#f7f8f5}
+body:has(.contactConceptHero) .siteClose :is(p,small){color:#c7cec8}
+body:has(.contactConceptHero) .siteClose .eyebrow{color:#b8c2ba!important}
+body:has(.contactConceptHero) .siteClose .title-setup{color:#f7f8f5!important}
+body:has(.contactConceptHero) .siteClose .title-payoff{color:var(--jt-lime)!important}
+body:has(.contactConceptHero) .siteClose p{max-width:580px}
+body:has(.contactConceptHero) .siteClose .btn-orange{color:#111!important}
+body:has(.contactConceptHero) .siteClose .btn-outline{color:#f7f8f5!important;border-color:#9da69f!important}
+body:has(.contactConceptHero) .siteClose aside a{color:var(--jt-lime)!important}
+
+@media(max-width:1100px){
+  .contactConceptHeroInner{grid-template-columns:1fr;min-height:0}
+  .contactConceptHeroCopy{padding:62px max(32px,calc((100vw - 900px)/2))}
+  .contactHeroImage{min-height:390px}
+  .contactStartPaths{width:min(900px,calc(100% - 64px));grid-template-columns:1fr;margin:28px auto}
+  .contactStartPaths a{border-right:0;border-bottom:1px solid #313832}
+  .contactStartPaths a:last-child{border-bottom:0}
+  .contactRequestChapter{grid-template-columns:1fr!important;gap:42px!important}
+  .contactRequestChapter .requestGuide{position:static!important;top:auto!important;max-width:760px}
+  .contactNotesForm{justify-self:start;max-width:760px}
+  .contactShopChapter{grid-template-columns:1fr}
+  .contactShopCopy{padding:66px max(32px,calc((100vw - 900px)/2))}
+  .contactMap{min-height:390px}
+}
+@media(max-width:700px){
+  .contactConceptHeroCopy{padding:54px 24px}
+  .contactConceptHeroCopy .actions{display:grid;grid-template-columns:1fr}
+  .contactConceptHeroCopy .actions a{justify-content:center}
+  .contactHeroImage{min-height:285px}
+  .contactHeroImage figcaption{left:24px;right:24px;bottom:22px}
+  .contactStartPaths{width:auto;margin:0;border-left:0;border-right:0}
+  .contactStartPaths a{grid-template-columns:48px 1fr 18px;padding:22px 24px}
+  .contactRequestChapter{padding:58px 24px!important;gap:34px!important}
+  .contactNotesForm{padding:24px 18px!important}
+  .contactShopCopy{padding:58px 24px}
+  .contactShopFacts{grid-template-columns:1fr}
+  .contactShopFacts article+article{border-left:0;border-top:1px solid #303731;padding-left:0}
+  .contactMap{min-height:315px}
+  .contactFaq{padding:58px 24px!important}
+  .contactFaqGrid{grid-template-columns:1fr}
+  .contactFaqGrid article{min-height:auto;border-right:0!important;border-bottom:1px solid #c9cec8!important;padding:25px 22px}
+  .contactFaqGrid article:last-child{border-bottom:0!important}
+}
+
+/* V8.6.68 — Contact final alignment with the shared hero and close contracts. */
+@media(min-width:1101px){
+  body:has(.contactConceptHero) .contactConceptHeroInner{min-height:470px!important}
+  body:has(.contactConceptHero) .contactHeroImage{min-height:470px!important}
+  body:has(.contactConceptHero) .contactConceptHeroCopy{padding-top:48px!important;padding-bottom:48px!important}
+  body:has(.contactConceptHero) .contactConceptHeroCopy .title-setup{font-size:clamp(2.45rem,3.6vw,4.1rem)!important}
+  body:has(.contactConceptHero) .contactConceptHeroCopy .title-payoff{font-size:clamp(3rem,4.45vw,4.9rem)!important}
+  body:has(.contactConceptHero) .siteClose.final-cta{padding:44px 64px!important}
+  body:has(.contactConceptHero) .siteClose.final-cta h2.title-pair{max-width:520px!important}
+}
+/* This selector intentionally outranks the generic light-section secondary rule. */
+body:has(.contactConceptHero) section.contactShopChapter.surface-dark .actions .secondary{color:#f7f8f5!important;border-color:#9da69f!important}
+body:has(.contactConceptHero) section.contactShopChapter.surface-dark .actions .secondary:hover,
+body:has(.contactConceptHero) section.contactShopChapter.surface-dark .actions .secondary:focus-visible{background:#f7f8f5!important;color:#090a09!important;border-color:#f7f8f5!important}
+
+/* Resilient directions map: a usable, linked local fallback when embeds are blocked. */
+body:has(.contactConceptHero) .contactMapFallback{position:relative;isolation:isolate;display:block;min-height:500px;overflow:hidden;background:linear-gradient(135deg,#d7ddd7,#eef0eb 48%,#c7d1c7);color:#101411;text-decoration:none}
+body:has(.contactConceptHero) .contactMapFallback:before,body:has(.contactConceptHero) .contactMapFallback:after{content:"";position:absolute;inset:0;z-index:-2;opacity:.74;background:repeating-linear-gradient(0deg,transparent 0 64px,rgba(57,125,0,.19) 65px 67px,transparent 68px 132px),repeating-linear-gradient(90deg,transparent 0 92px,rgba(57,125,0,.16) 93px 95px,transparent 96px 184px);transform:rotate(-7deg) scale(1.18)}
+body:has(.contactConceptHero) .contactMapFallback:after{z-index:-1;opacity:.55;background:linear-gradient(34deg,transparent 0 42%,rgba(255,116,23,.75) 42.2% 43.5%,transparent 43.8% 100%);transform:none}
+body:has(.contactConceptHero) .mapRoad{position:absolute;z-index:-1;display:block;background:rgba(255,255,255,.78);box-shadow:0 0 0 2px rgba(57,125,0,.12)}
+body:has(.contactConceptHero) .mapRoad--one{width:120%;height:28px;top:43%;left:-10%;transform:rotate(-16deg)}
+body:has(.contactConceptHero) .mapRoad--two{width:28px;height:120%;top:-10%;left:58%;transform:rotate(19deg)}
+body:has(.contactConceptHero) .mapRoad--three{width:110%;height:18px;top:67%;left:-5%;transform:rotate(9deg)}
+body:has(.contactConceptHero) .mapMarker{position:absolute;top:42%;left:53%;z-index:1;display:grid;place-items:center;width:78px;height:78px;border:5px solid #f7f8f5;border-radius:50%;background:var(--orange);box-shadow:0 10px 24px rgba(10,14,11,.28);color:#111;font:950 .9rem/1 var(--ui,Arial,sans-serif);letter-spacing:.04em}
+body:has(.contactConceptHero) .mapMarker:after{content:"";position:absolute;bottom:-18px;left:23px;border:13px solid transparent;border-top-color:var(--orange);z-index:-1}
+body:has(.contactConceptHero) .mapCopy{position:absolute;left:clamp(28px,4vw,56px);bottom:clamp(28px,4vw,56px);display:flex;flex-direction:column;padding:19px 22px;background:#101411;color:#f7f8f5;box-shadow:0 10px 28px rgba(10,14,11,.2)}
+body:has(.contactConceptHero) .mapCopy small{color:var(--jt-lime);font:900 .64rem/1 var(--ui,Arial,sans-serif);letter-spacing:.14em}
+body:has(.contactConceptHero) .mapCopy strong{margin-top:9px;font:900 1.2rem/1 var(--display,Arial,sans-serif);letter-spacing:.02em}
+body:has(.contactConceptHero) .mapCopy em{margin-top:6px;color:#d0d7d1;font:400 .82rem/1.3 Arial,sans-serif}
+body:has(.contactConceptHero) .contactMapFallback:hover .mapCopy,body:has(.contactConceptHero) .contactMapFallback:focus-visible .mapCopy{background:var(--orange);color:#111}
+body:has(.contactConceptHero) .contactMapFallback:hover .mapCopy small,body:has(.contactConceptHero) .contactMapFallback:hover .mapCopy em,body:has(.contactConceptHero) .contactMapFallback:focus-visible .mapCopy small,body:has(.contactConceptHero) .contactMapFallback:focus-visible .mapCopy em{color:#111}
+
+/* Shared desktop close: the final decision point stays compact on every concept page. */
+@media(min-width:901px){
+  body:has(.aboutConceptPage) .siteClose.final-cta,
+  body:has(.hero) .siteClose.final-cta,
+  body:has(.campusHero) .siteClose.final-cta,
+  body:has(.servicesConceptHero) .siteClose.final-cta,
+  body:has(.reviewsHero) .siteClose.final-cta{padding:44px 64px!important}
+  body:has(.hero) .siteClose.final-cta h2.title-pair,
+  body:has(.campusHero) .siteClose.final-cta h2.title-pair,
+  body:has(.servicesConceptHero) .siteClose.final-cta h2.title-pair,
+  body:has(.reviewsHero) .siteClose.final-cta h2.title-pair{max-width:520px!important}
+}
+@media(max-width:1100px){body:has(.contactConceptHero) .contactMapFallback{min-height:390px}}
+@media(max-width:700px){body:has(.contactConceptHero) .contactMapFallback{min-height:315px}}
+
+/* V8.6.77 — CANONICAL CONTAINED-SITE + DIAGNOSTICS SYSTEM
+   Clean replacement for the accumulated V8.6.70–V8.6.76 override layers.
+   One source of truth for the contained frame, outer canvas, large-desktop rhythm,
+   and the current Diagnostics composition. */
+:root{
+  --jt-site-frame:1440px;
+  --jt-frame-gap:clamp(14px,2.2vw,34px);
+  --frame-pad:clamp(44px,4.45%,64px);
+}
+
+/* Outer environment + contained site object. */
+html{
+  background-color:#050706!important;
+  background-image:
+    radial-gradient(ellipse at 50% -10%,rgba(121,255,0,.008),transparent 32rem),
+    linear-gradient(30deg,rgba(255,255,255,.006) 12%,transparent 12.5%,transparent 87%,rgba(255,255,255,.006) 87.5%),
+    linear-gradient(150deg,rgba(255,255,255,.006) 12%,transparent 12.5%,transparent 87%,rgba(255,255,255,.006) 87.5%),
+    linear-gradient(30deg,rgba(255,255,255,.004) 12%,transparent 12.5%,transparent 87%,rgba(255,255,255,.004) 87.5%),
+    linear-gradient(150deg,rgba(255,255,255,.004) 12%,transparent 12.5%,transparent 87%,rgba(255,255,255,.004) 87.5%),
+    linear-gradient(60deg,rgba(0,0,0,.16) 25%,transparent 25.5%,transparent 75%,rgba(0,0,0,.16) 75.5%),
+    linear-gradient(120deg,rgba(0,0,0,.16) 25%,transparent 25.5%,transparent 75%,rgba(0,0,0,.16) 75.5%),
+    linear-gradient(#070a08,#050706)!important;
+  background-size:auto,34px 59px,34px 59px,34px 59px,34px 59px,34px 59px,34px 59px,auto!important;
+  background-position:center top,0 0,0 0,17px 29.5px,17px 29.5px,0 0,0 0,0 0!important;
+  background-attachment:fixed!important;
+}
+body{
+  width:min(calc(100% - (var(--jt-frame-gap) * 2)),var(--jt-site-frame))!important;
+  max-width:var(--jt-site-frame)!important;
+  margin:0 auto!important;
+  background:var(--jt-paper);
+  box-shadow:0 24px 82px rgba(0,0,0,.74)!important;
+}
+body>.top{
+  left:50%!important;right:auto!important;
+  width:min(calc(100% - (var(--jt-frame-gap) * 2)),var(--jt-site-frame))!important;
+  max-width:var(--jt-site-frame)!important;
+  transform:translateX(-50%);
+}
+body>main,body>footer{width:100%!important;max-width:100%!important;margin-left:auto!important;margin-right:auto!important}
+
+/* One desktop gutter rhythm. No new component should derive horizontal spacing from 100vw. */
+@media(min-width:781px){
+  .section,.siteClose,body>footer,
+  .bgsu-band,.aboutStoryBand,.aboutValuesBand,.aboutProofBand,
+  .reviewThemes,.reviewVoices,.reviewTransparency,.reviewsClose,
+  .distanceProblem,.contactConceptHero,.contactRequestChapter,.contactShopChapter,.contactFaq,
+  .diagnosticBridge,.reviewSignalMap{
+    padding-left:var(--frame-pad)!important;
+    padding-right:var(--frame-pad)!important;
+  }
+  .hero-copy{margin-left:var(--frame-pad)!important;width:min(680px,52%)!important}
+  .reviewsHeroCopy,.campusHeroCopy{padding-left:var(--frame-pad)!important}
+  .reviewMetricRail{padding-left:0!important;padding-right:0!important}
+  .service-image{margin-left:calc(var(--frame-pad) * -1)!important}
+  .serviceFamilyHeroCopy{padding-left:var(--frame-pad)!important;padding-right:var(--frame-pad)!important}
+  .sectionHead,.aboutStoryCopy,.reviewThemesIntro,.reviewTransparencyCopy,.serviceFamilyHeroCopy>div{max-width:720px}
+  p{overflow-wrap:break-word}
+  h1,h2,h3,.title-setup,.title-payoff{overflow-wrap:normal;word-break:normal}
+  .aboutHeroCopy{min-width:0!important;padding-left:var(--frame-pad)!important;padding-right:36px!important}
+  .aboutHeroCopy h1{font-size:clamp(3.35rem,4.2vw,4.75rem)!important;max-width:560px!important}
+  .aboutHeroCopy .title-setup,.aboutHeroCopy .title-payoff{display:block!important;white-space:normal!important;word-break:normal!important;overflow-wrap:normal!important}
+}
+
+/* Shared service-family hero contract. */
+.serviceFamilyHero{display:grid;width:100%;max-width:100%;overflow:hidden;background:#070a08;color:#f7f8f5;border-bottom:1px solid #293029}
+.serviceFamilyHeroCopy{display:flex;flex-direction:column;justify-content:center;min-width:0;background:linear-gradient(135deg,#070a08 0%,#0c120d 100%)}
+.serviceFamilyHero .eyebrow{color:#b9c3bb!important}
+.serviceFamilyHero .title-page{font-size:clamp(3rem,4.25vw,5.2rem)!important;line-height:.9!important;max-width:760px!important}
+.serviceFamilyHero .title-page .title-setup,.serviceFamilyHero .title-page .title-payoff{font-size:inherit!important;line-height:inherit!important;max-width:100%;white-space:normal!important;overflow-wrap:normal!important;word-break:normal!important}
+.serviceFamilyHero .title-setup{color:#f7f8f5!important}
+.serviceFamilyHero .title-payoff{color:var(--jt-lime)!important}
+.serviceFamilyHero .lede{max-width:600px;color:#d7ddd8!important;font-size:clamp(1rem,1.25vw,1.2rem);line-height:1.55}
+.serviceHeroCrumb{display:flex;align-items:center;gap:7px;margin:0 0 28px;color:#aeb8b0;font-size:.72rem;line-height:1}
+.serviceHeroCrumb a{color:#dfe5e0;text-decoration:none}
+.serviceHeroCrumb a:hover,.serviceHeroCrumb a:focus-visible{color:var(--jt-lime)}
+.serviceHeroCrumb span:last-child{color:#fff;font-weight:900}
+
+/* Every service family begins with the same editorial copy + proof-photo frame. */
+.serviceDiagnosticsHero,.serviceDetailHero{grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr)!important;min-height:540px!important}
+.serviceDiagnosticsHero .title-page,.serviceDetailHero .title-page{font-size:clamp(2.65rem,3.75vw,4.35rem)!important;max-width:100%!important}
+.serviceDiagnosticsHero .serviceFamilyHeroCopy,.serviceDetailHero .serviceFamilyHeroCopy{min-height:540px;max-width:none;padding-top:64px!important;padding-bottom:64px!important}
+.serviceDiagnosticsHero .diagnosticHeroPhoto,.serviceDetailHero .diagnosticHeroPhoto{display:block!important;position:relative;min-height:540px;margin:0;overflow:hidden;background:#0a0d0b}
+.serviceDiagnosticsHero .diagnosticHeroPhoto img,.serviceDetailHero .diagnosticHeroPhoto img{display:block;width:100%;height:100%;position:absolute;inset:0;object-fit:cover;object-position:center}
+.serviceDiagnosticsHero .diagnosticHeroPhoto:after,.serviceDetailHero .diagnosticHeroPhoto:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(7,10,8,.24),transparent 42%),linear-gradient(0deg,rgba(7,10,8,.82),transparent 54%)}
+.serviceDiagnosticsHero .diagnosticHeroPhoto figcaption,.serviceDetailHero .diagnosticHeroPhoto figcaption{position:absolute;z-index:1;left:clamp(26px,4vw,56px);right:26px;bottom:clamp(26px,4vw,52px);display:flex;flex-direction:column;gap:7px;color:#fff}
+.serviceDiagnosticsHero .diagnosticHeroPhoto figcaption span,.serviceDetailHero .diagnosticHeroPhoto figcaption span{color:var(--jt-lime);font:900 .67rem/1 var(--ui);letter-spacing:.14em}
+.serviceDiagnosticsHero .diagnosticHeroPhoto figcaption strong,.serviceDetailHero .diagnosticHeroPhoto figcaption strong{font:900 clamp(1.45rem,2.2vw,2.35rem)/.95 var(--display);text-transform:uppercase}
+.serviceDiagnosticsHero .diagnosticHeroPhoto figcaption small,.serviceDetailHero .diagnosticHeroPhoto figcaption small{color:#d4dcd6;line-height:1.4;max-width:28rem}
+.serviceDiagnosticsHero .eyebrow,.serviceDetailHero .eyebrow{margin:0 0 14px!important}
+.serviceDiagnosticsHero .lede,.serviceDetailHero .lede{margin-top:22px!important}
+.serviceDiagnosticsHero .actions,.serviceDetailHero .actions{margin-top:28px!important}
+
+@media(max-width:900px){
+  .serviceDiagnosticsHero,.serviceDetailHero{grid-template-columns:1fr!important;min-height:auto!important}
+  .serviceDiagnosticsHero .serviceFamilyHeroCopy,.serviceDetailHero .serviceFamilyHeroCopy{min-height:440px}
+  .serviceDiagnosticsHero .diagnosticHeroPhoto,.serviceDetailHero .diagnosticHeroPhoto{min-height:340px}
+}
+
+.diagnosticPattern,.diagnosticGuide,.serviceFamilyFaq{background:#f3f3ee!important;color:#111411!important}
+.diagnosticPattern :is(h1,h2,h3,strong),.diagnosticGuide :is(h1,h2,h3,strong),.serviceFamilyFaq :is(h1,h2,h3,strong){color:#111411!important}
+.diagnosticPattern :is(p,small),.diagnosticGuide :is(p,small),.serviceFamilyFaq :is(p,small){color:#424a44!important}
+.diagnosticPattern .eyebrow,.diagnosticGuide .eyebrow,.serviceFamilyFaq .eyebrow{color:#397d00!important}
+.diagnosticPattern .title-setup,.diagnosticGuide .title-setup,.serviceFamilyFaq .title-setup{color:#111411!important}
+.diagnosticPattern .title-payoff,.diagnosticGuide .title-payoff,.serviceFamilyFaq .title-payoff{color:#397d00!important}
+
+.diagnosticPattern{display:grid;grid-template-columns:minmax(280px,.72fr) minmax(0,1.28fr);gap:clamp(48px,7vw,100px);align-items:start}
+.diagnosticPatternIntro{max-width:470px}
+.diagnosticPatternIntro>p:last-child{color:#4c554e;line-height:1.6}
+.patternMatrix{display:grid;grid-template-columns:1fr 1fr;background:#f8f8f4;border-top:1px solid #c8cec8;border-left:1px solid #c8cec8}
+.patternMatrix article{min-height:210px;padding:28px;background:#f8f8f4;border-right:1px solid #c8cec8;border-bottom:1px solid #c8cec8}
+.patternMatrix span{color:#397d00;font:900 .67rem/1 var(--ui);letter-spacing:.12em}
+.patternMatrix strong{display:block;margin:18px 0 9px;color:#111411!important;font:900 1.05rem/1.05 var(--display)}
+.patternMatrix p{margin:0;color:#424a44!important;line-height:1.5;font-size:.9rem}
+
+/* The remaining service families use the same reading rhythm, with their own
+   symptom copy and service-specific clues supplied by each page. */
+.serviceFamilyPattern{display:grid;grid-template-columns:minmax(280px,.9fr) minmax(0,1.1fr);gap:clamp(48px,7vw,100px);align-items:start}
+.serviceFamilyPattern>div:first-child{max-width:540px}
+.serviceFamilyPattern>div:first-child>p:not(.eyebrow){max-width:500px;color:#4c554e!important;line-height:1.6}
+.serviceFamilyPattern .symptomList{margin:26px 0 30px;padding:0;list-style:none;border-top:1px solid #c8cec8}
+.serviceFamilyPattern .symptomList li{padding:13px 0!important;border-bottom:1px solid #c8cec8!important;color:#202720;font-weight:750}
+.serviceFamilyPattern .symptomList li::marker{display:none}
+.serviceFamilyPattern .serviceProof{position:static!important;display:flex;flex-direction:column;align-items:flex-start;min-height:0;padding:30px;background:#f8f8f4;border:1px solid #c8cec8;border-top:3px solid var(--orange)}
+.serviceFamilyPattern .serviceProof>.eyebrow{margin:0 0 18px!important;color:#397d00!important;font:900 .72rem/1.5 var(--ui)!important;letter-spacing:.1em}
+.serviceFamilyPattern .serviceProof h3{margin:0 0 14px;color:#111411!important;font:900 clamp(1.6rem,2vw,2.25rem)/.98 var(--display)}
+.serviceFamilyPattern .serviceProof>p:not(.eyebrow){margin:0 0 24px;color:#424a44!important;line-height:1.55}
+.serviceFamilyPattern .proofMini{display:grid;gap:4px;width:100%;margin-top:8px;padding:16px 0 0;border-top:1px solid #c8cec8}
+.serviceFamilyPattern .proofMini+ .proofMini{margin-top:14px}
+.serviceFamilyPattern .proofMini strong{color:#111411!important;font:900 1rem/1 var(--display)}
+.serviceFamilyPattern .proofMini span{color:#397d00;font:900 .66rem/1.2 var(--ui);letter-spacing:.1em;text-transform:uppercase}
+
+.diagnosticBridge{display:grid;grid-template-columns:minmax(320px,.82fr) minmax(0,1.18fr);gap:clamp(50px,8vw,120px);padding-top:76px;padding-bottom:76px;background:#080b09!important;color:#f7f8f5!important}
+.diagnosticBridge :is(h1,h2,h3,strong){color:#f7f8f5!important}
+.diagnosticBridge :is(p,small){color:#c7cec8!important}
+.diagnosticBridge .eyebrow{color:#b8c2ba!important}
+.diagnosticBridge .title-setup{color:#f7f8f5!important}
+.diagnosticBridge .title-payoff{color:var(--jt-lime)!important}
+.diagnosticBridgeLead>p{max-width:520px;color:#c4ccc6!important;line-height:1.55}
+.diagnosticTimeline{border-top:1px solid #384139}
+.diagnosticTimeline>div{display:grid;grid-template-columns:72px 110px 1fr;gap:18px;align-items:center;padding:21px 0;border-bottom:1px solid #384139}
+.diagnosticTimeline b{color:var(--orange);font:900 .75rem/1 var(--ui)}
+.diagnosticTimeline span{color:#96a198;font:900 .66rem/1 var(--ui);letter-spacing:.11em}
+.diagnosticTimeline strong{color:#f7f8f5!important;font:900 1rem/1.1 var(--display)}
+
+.serviceFamilyBridge .sectionHead{display:block!important;align-self:start;margin:0!important;max-width:520px}
+.serviceFamilyBridge .sectionHead .eyebrow{display:block;margin:0 0 14px!important}
+.serviceFamilyBridge .clueGrid{display:block;max-width:none;margin:0;background:transparent;border:0;border-top:1px solid #384139}
+.serviceFamilyBridge .clueGrid article{display:grid;grid-template-columns:72px minmax(150px,.55fr) minmax(0,1fr);gap:18px;align-items:center;min-height:0;padding:21px 0;background:transparent;border:0;border-bottom:1px solid #384139}
+.serviceFamilyBridge .clueGrid b{margin:0;color:var(--orange);font:900 .75rem/1 var(--ui)}
+.serviceFamilyBridge .clueGrid h3{margin:0;max-width:none;color:#f7f8f5;font:900 1rem/1.1 var(--display)}
+.serviceFamilyBridge .clueGrid p{margin:0;max-width:none;color:#c7cec8;line-height:1.5;font-size:.92rem}
+
+.diagnosticGuide{display:grid;grid-template-columns:minmax(280px,.8fr) minmax(0,1.2fr);gap:clamp(48px,7vw,100px);align-items:start;padding-top:clamp(48px,4vw,62px)!important;padding-bottom:clamp(48px,4vw,62px)!important}
+.diagnosticGuide>div:first-child>p:last-child{max-width:480px;color:#505851;line-height:1.55}
+.diagnosticGuideList{padding:0 26px;background:#f8f8f4;border:1px solid #c8cec8;border-top:3px solid var(--orange)}
+.diagnosticGuideList article{display:grid;grid-template-columns:100px 1fr;gap:24px;padding:24px 0;border-bottom:1px solid #c8cec8}
+.diagnosticGuideList article:last-child{border-bottom:0}
+.diagnosticGuideList span{color:#397d00!important;font:900 .7rem/1 var(--ui);letter-spacing:.12em}
+.diagnosticGuideList p{margin:0;color:#303731!important;line-height:1.5}
+.diagnosticGuideList:after{content:"NO REPAIR NAME  /  YOUR WORDS ARE ENOUGH.     •     A PHOTO HELPS  /  SAVE A MESSAGE OR WARNING LIGHT.     •     WE ASK NEXT  /  J&T HELPS FILL IN THE GAPS.";display:block;padding:22px 0 26px;border-top:1px solid #c8cec8;color:#397d00;font:900 .66rem/1.45 var(--ui);letter-spacing:.08em}
+
+.serviceFamilyFaq{display:grid;grid-template-columns:minmax(260px,.58fr) minmax(0,1.42fr);gap:clamp(42px,7vw,100px);align-items:start;padding-top:clamp(52px,4.5vw,68px)!important;padding-bottom:clamp(52px,4.5vw,68px)!important;background:#0b100d!important;color:#f7f8f5!important;border-top:1px solid #303a32}
+.serviceFamilyFaq .sectionHead,.serviceFamilyRelated .sectionHead{display:block!important;align-self:start;margin:0!important;max-width:520px}
+.serviceFamilyFaq .sectionHead .eyebrow,.serviceFamilyRelated .sectionHead .eyebrow{display:block;margin:0 0 14px!important}
+.serviceFamilyFaq .eyebrow{color:#b8c2ba!important}
+.serviceFamilyFaq .title-setup{color:#f7f8f5!important}
+.serviceFamilyFaq .title-payoff{color:var(--jt-lime)!important}
+.serviceFamilyFaq .faqList{display:grid;gap:10px;margin:0!important}
+.serviceFamilyFaq details{padding:0!important;background:#f8f8f4!important;border:1px solid #c8cec8!important;color:#111411!important}
+.serviceFamilyFaq summary{padding:18px 22px;color:#111411!important}
+.serviceFamilyFaq details[open] summary{border-bottom:1px solid #c8cec8}
+.serviceFamilyFaq details p{margin:0!important;padding:18px 22px 22px!important;color:#424a44!important}
+
+.serviceFamilyRelated{padding-top:72px!important;padding-bottom:72px!important;background:#080b09!important;color:#f7f8f5!important}
+.serviceFamilyRelated .eyebrow{color:#b8c2ba!important}
+.serviceFamilyRelated .title-setup{color:#f7f8f5!important}
+.serviceFamilyRelated .title-payoff{color:var(--jt-lime)!important}
+.serviceFamilyRelated .sectionHead{margin-bottom:30px!important}
+.serviceFamilyRelated .serviceCards.compact{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:18px!important}
+.serviceFamilyRelated .serviceCard{display:flex!important;min-height:150px!important;padding:22px!important;flex-direction:column!important;background:#101511!important;border:1px solid #384139!important;color:#f7f8f5!important;text-decoration:none!important;position:relative!important;overflow:hidden!important;transition:transform .16s ease,border-color .16s ease!important}
+.serviceFamilyRelated .serviceCard:before{content:"";position:absolute;left:0;top:0;width:54px;height:3px;background:var(--jt-lime)}
+.serviceFamilyRelated .serviceCard:after{content:"";position:absolute;z-index:0;top:0;right:0;bottom:0;width:48%;background-position:center;background-size:cover;background-repeat:no-repeat;opacity:.68;filter:saturate(.76) contrast(1.08);mask-image:linear-gradient(90deg,transparent 0%,#000 40%);-webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 40%)}
+.serviceFamilyRelated .serviceCard[href="maintenance.html"]:after{background-image:url('assets/image-audit/maintenance-hero-ai-v2.png');background-position:right center;opacity:.52;filter:saturate(.62) contrast(1.05) brightness(.78)}
+.serviceFamilyRelated .serviceCard[href="brake-repair.html"]:after{background-image:url('assets/image-audit/brake-hero-ai.png')}
+.serviceFamilyRelated .serviceCard[href="diagnostics.html"]:after{background-image:url('assets/image-audit/diagnostics-engine-ai.png')}
+.serviceFamilyRelated .serviceCard[href="engine-repair.html"]:after{background-image:url('assets/image-audit/engine-hero-ai.png')}
+.serviceFamilyRelated .serviceCard[href="electrical-repair.html"]:after{background-image:url('assets/image-audit/electrical-hero-ai.png')}
+.serviceFamilyRelated .serviceCard[href="ac-heating.html"]:after{background-image:url('assets/image-audit/climate-hero-ai.png')}
+.serviceFamilyRelated .serviceCard[href="suspension-steering.html"]:after{background-image:url('assets/image-audit/suspension-hero-ai.png')}
+.serviceFamilyRelated .serviceCard[href="wheel-alignment.html"]:after{background-image:url('assets/image-audit/alignment-hero-ai.png')}
+.serviceFamilyRelated .serviceCard>*{position:relative;z-index:1}
+.serviceFamilyRelated .serviceCard:hover,.serviceFamilyRelated .serviceCard:focus-visible{transform:translateY(-2px);border-color:#718078!important}
+.serviceFamilyRelated .serviceCard h3{max-width:15ch;margin:14px 0 8px!important;color:#f7f8f5!important;font-size:1.18rem!important}
+.serviceFamilyRelated .serviceCard p{margin:0 0 24px!important;color:#c7cec8!important;line-height:1.5!important}
+.serviceFamilyRelated .serviceCard b{margin-top:auto!important;color:var(--jt-lime)!important;text-transform:uppercase!important;font-size:.72rem!important;letter-spacing:.08em!important}
+.serviceFamilyPage .siteClose.final-cta{padding-top:34px!important;padding-bottom:34px!important;min-height:0!important}
+.serviceFamilyPage .siteClose.final-cta h2.title-pair{max-width:520px!important}
+.serviceDiagnosticsHero~section .title-section>.title-setup{font-size:var(--title-section-setup)!important;line-height:.98!important}
+.serviceDiagnosticsHero~section .title-section>.title-payoff{font-size:var(--title-section-payoff)!important;line-height:.94!important}
+
+@media(max-width:1050px){
+  .diagnosticPattern,.serviceFamilyPattern,.diagnosticBridge,.serviceFamilyBridge,.diagnosticGuide,.serviceFamilyFaq{grid-template-columns:1fr}
+  .diagnosticPatternIntro{max-width:650px}
+  .diagnosticBridge,.serviceFamilyBridge{gap:42px}
+  .serviceFamilyRelated .serviceCards.compact{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+}
+@media(max-width:780px){
+  :root{--jt-frame-gap:0px}
+  html{background:#050706!important;background-image:none!important}
+  body{width:100%!important;box-shadow:none!important}
+  body>.top{width:100%!important}
+  .section,.siteClose,body>footer,.diagnosticBridge,.reviewSignalMap,.contactConceptHero,.contactRequestChapter,.contactShopChapter,.contactFaq{padding-left:24px!important;padding-right:24px!important}
+  .serviceFamilyHeroCopy{padding-left:24px!important;padding-right:24px!important}
+  .serviceFamilyHero .title-page{font-size:clamp(2.65rem,12vw,4.2rem)!important}
+  .serviceDiagnosticsHero .serviceFamilyHeroCopy{min-height:440px;padding-top:48px!important;padding-bottom:48px!important}
+}
+@media(max-width:700px){
+  .serviceHeroCrumb{margin-bottom:22px}
+  .diagnosticPattern,.serviceFamilyPattern{gap:32px}
+  .patternMatrix{grid-template-columns:1fr}
+  .patternMatrix article{min-height:auto}
+  .diagnosticBridge,.serviceFamilyBridge{padding-top:58px;padding-bottom:58px}
+  .diagnosticGuideList:after{padding-bottom:22px;font-size:.61rem}
+  .diagnosticTimeline>div,.serviceFamilyBridge .clueGrid article{grid-template-columns:58px 1fr;gap:8px 14px}
+  .diagnosticTimeline strong,.serviceFamilyBridge .clueGrid p{grid-column:2}
+  .diagnosticGuide{gap:30px}
+  .diagnosticGuideList{padding:0 18px}
+  .diagnosticGuideList article{grid-template-columns:76px 1fr;gap:16px}
+  .serviceFamilyRelated{padding-top:56px!important;padding-bottom:56px!important}
+  .serviceFamilyRelated .serviceCards.compact{grid-template-columns:1fr!important}
+}
+
+/* V8.6.69 — Premium interaction layer
+   Deliberate response, not decoration: fast confirmation on actions, measured
+   lift on choices, and an energetic but restrained BGSU path. */
+@media (hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference){
+  :is(.cta,.btn,.secondary){transition:transform .18s ease,box-shadow .18s ease,background .18s ease,border-color .18s ease,color .18s ease!important}
+  :is(.cta,.btn.btn-orange):hover,:is(.cta,.btn.btn-orange):focus-visible{transform:translateY(-3px)!important;box-shadow:0 0 0 1px rgba(121,255,0,.68),0 0 22px rgba(121,255,0,.3),0 12px 28px rgba(0,0,0,.24)!important}
+  :is(.secondary,.btn.btn-outline):hover,:is(.secondary,.btn.btn-outline):focus-visible{transform:translateY(-2px)!important;box-shadow:0 0 0 1px rgba(121,255,0,.48),0 0 18px rgba(121,255,0,.2),0 10px 24px rgba(0,0,0,.18)!important}
+
+  body:has(.servicesConceptHero) .serviceDirectoryGrid .serviceCard{transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease,background .2s ease!important}
+  body:has(.servicesConceptHero) .serviceDirectoryGrid .serviceCard:hover,
+  body:has(.servicesConceptHero) .serviceDirectoryGrid .serviceCard:focus-visible{transform:translateY(-5px)!important;box-shadow:0 16px 34px rgba(0,0,0,.32),0 0 0 1px rgba(121,255,0,.18)!important}
+
+  .contactStartPaths a{transition:transform .18s ease,background .18s ease,box-shadow .18s ease!important}
+  .contactStartPaths a:hover,.contactStartPaths a:focus-visible{transform:translateY(-4px);box-shadow:0 14px 26px rgba(0,0,0,.24);z-index:1}
+  .contactStartPaths a:hover .contactPathIcon,.contactStartPaths a:focus-visible .contactPathIcon{border-color:var(--jt-lime);box-shadow:0 0 0 5px rgba(121,255,0,.08)}
+
+  /* Informational cards stay visually stable: only their real source links act. */
+  body:has(.campusHero) .studentProofRail>a:hover,body:has(.campusHero) .studentProofRail>a:focus-visible{filter:brightness(1.08);letter-spacing:.06em}
+}
+
+/* V8.6.80 — compact closing chapter: enough room to decide, no dead band before the footer. */
+.siteClose.final-cta{
+  min-height:0!important;
+  padding-top:30px!important;
+  padding-bottom:30px!important;
+  gap:clamp(32px,4vw,56px)!important;
+}
+
+/* V8.6.81 — one closing chapter on every page.
+   This intentionally wins over the earlier page-family finishing passes: all
+   pages keep the Services close's compact copy/location split, while wording
+   remains page-specific. */
+.siteClose.final-cta{
+  display:grid!important;
+  grid-template-columns:minmax(0,1.35fr) minmax(280px,.65fr)!important;
+  align-items:center!important;
+  min-height:0!important;
+  padding-top:34px!important;
+  padding-bottom:34px!important;
+  gap:clamp(32px,4vw,56px)!important;
+}
+.siteClose.final-cta .eyebrow{margin:0 0 10px!important}
+.siteClose.final-cta h2.title-pair{max-width:520px!important;margin:0 0 12px!important}
+.siteClose.final-cta h2.title-pair>.title-setup{font-size:var(--title-section-setup)!important;line-height:.98!important}
+.siteClose.final-cta h2.title-pair>.title-payoff{font-size:var(--title-section-payoff)!important;line-height:.94!important}
+.siteClose.final-cta>div>p:not(.eyebrow){max-width:560px!important;font-size:.95rem!important;line-height:1.5!important}
+.siteClose.final-cta .actions{margin-top:16px!important}
+.siteClose.final-cta aside{padding-top:10px!important;padding-bottom:10px!important}
+@media(min-width:781px){.siteClose.final-cta{padding-left:var(--frame-pad)!important;padding-right:var(--frame-pad)!important}}
+@media(max-width:780px){.siteClose.final-cta{grid-template-columns:1fr!important;padding:34px 24px!important;gap:24px!important}.siteClose.final-cta aside{padding-top:22px!important;padding-bottom:0!important}}
+.siteClose h2{margin-bottom:11px!important}
+.siteClose .actions{margin-top:17px!important}
+.siteClose aside{padding-top:18px!important;padding-bottom:18px!important}
+@media(max-width:780px){
+  .siteClose.final-cta{padding-top:34px!important;padding-bottom:34px!important;gap:24px!important}
+  .siteClose aside{padding-top:22px!important;padding-bottom:0!important}
+}
+
+/* V8.6.82 — compact mobile conversion dock.
+   The header CTA and dock are mutually exclusive. Directions stays a neutral
+   utility action so the single orange request action keeps its meaning. */
+@media(min-width:781px){
+  .mobileBar{display:none!important}
+  .cta.small.desktop-cta{display:inline-flex!important}
+}
+@media(max-width:780px){
+  body{padding-bottom:52px!important}
+  body>footer{padding-bottom:72px!important}
+  .cta.small.desktop-cta{display:none!important}
+  /* Home hero: reserve a visible photograph lead-in, then begin the decision
+     card lower in the frame. The added height keeps its actions clear of the
+     service rail instead of merely nudging the text within its old slot. */
+  .hero{
+    min-height:1120px!important;
+    align-items:flex-start!important;
+    padding-top:85px!important;
+  }
+  .hero>.hero-copy{margin-top:0!important}
+  .hero>.hero-copy:before{inset:-18px -18px -24px -24px!important}
+  /* The service rail is a compact next step, not part of the opening image.
+     Three small cells per row keep it useful without stealing the hero. */
+  .hero>.service-strip{
+    grid-template-columns:repeat(3,minmax(0,1fr))!important;
+    margin-top:330px!important;
+  }
+  .hero>.service-strip>a{
+    min-height:70px!important;padding:9px 4px!important;gap:4px!important;
+    font-size:.59rem!important;line-height:1.1!important;
+  }
+  .hero>.service-strip b{font-size:1.18rem!important;margin-bottom:2px!important}
+  /* The logo extends below the 76px shell, so the opened menu needs a real
+     breathing lane before its first control. */
+  .top nav{padding-top:42px!important}
+  /* Never preserve a desktop min-content track on the one-column campaign. */
+  .bgsu-band.bgsu-campaign{grid-template-columns:minmax(0,1fr)!important;column-gap:0!important}
+  .bgsu-band.bgsu-campaign .bgsu-kicker{grid-column:1!important;grid-row:1!important}
+  .bgsu-band.bgsu-campaign .bgsu-message{grid-column:1!important;grid-row:2!important;min-width:0!important}
+  .bgsu-band.bgsu-campaign .bgsu-poster{grid-column:1!important;grid-row:3!important;min-width:0!important}
+  /* The final Services-menu prompt is a sentence, not a compact nav label. */
+  .top nav .servicesMenuSymptom{
+    white-space:normal!important;overflow-wrap:anywhere!important;
+    line-height:1.35!important;padding-top:14px!important;padding-bottom:14px!important;
+  }
+  /* Give the long utility prompt a deliberate two-line hierarchy on phones.
+     These are markup spans, so they retain normal layout and accessible text. */
+  .top nav .servicesMenuSymptom{font-size:.72rem!important}
+  .top nav .servicesMenuSymptomAction{display:block;margin-top:2px}
+  .mobileBar{
+    position:fixed!important;left:0;right:0;bottom:0;z-index:1200;
+    display:grid!important;grid-template-columns:1.08fr .94fr 1.28fr!important;
+    min-height:52px;background:#050706;border-top:1px solid #394039;
+    box-shadow:0 -8px 22px rgba(0,0,0,.18);
+  }
+  .mobileBar a{
+    min-height:52px!important;padding:0 10px!important;display:flex!important;
+    align-items:center;justify-content:center;text-align:center;color:#fff!important;
+    text-decoration:none;text-transform:uppercase;font-size:.68rem!important;
+    font-weight:950;letter-spacing:.025em;border:0!important;
+  }
+  .mobileBar .mobileCall{background:#050706;color:#fff!important}
+  .mobileBar .mobileDirections{background:#0c100e!important;color:#f7f8f5!important;border-left:1px solid #303630!important;border-right:1px solid #303630!important}
+  .mobileBar .mobileRequest{background:var(--jt-orange);color:#080909!important}
+
+  /* Rendered-text safety: mobile titles may take another line, but never run
+     off their own panel.  This is deliberately later than old per-page rules
+     that preserved desktop no-wrap headings. */
+  .title-pair>.title-setup,
+  .title-pair>.title-payoff{
+    max-width:100%!important;
+    white-space:normal!important;
+    overflow-wrap:break-word!important;
+    text-wrap:pretty!important;
+  }
+  /* Service-family pages use the same two-size title grammar as every other
+     page.  Older hero CSS made both spans inherit the oversized H1 size,
+     which could clip a setup such as "CABIN NOT COMFORTABLE?" on phones. */
+  .serviceFamilyHero .title-page{
+    font-size:inherit!important;
+    line-height:.9!important;
+    max-width:100%!important;
+    min-width:0!important;
+  }
+  .serviceFamilyHero .title-page>.title-setup{
+    font-size:var(--title-page-setup)!important;
+    line-height:.9!important;
+    letter-spacing:-.025em!important;
+  }
+  .serviceFamilyHero .title-page>.title-payoff{
+    font-size:var(--title-page-payoff)!important;
+    line-height:.9!important;
+    letter-spacing:-.05em!important;
+  }
+.reviewsHeroCopy h1.title-hero>.title-setup,
+.reviewsHeroCopy h1.title-hero>.title-payoff{
+    white-space:normal!important;
+  }
+  .reviewsHeroCopy h1.title-hero>.title-payoff{font-size:clamp(2.3rem,10.6vw,3.2rem)!important}
+
+  /* The BGSU poster is copy, not a graphic lockup: keep its emphasis while
+     allowing the short statement to fit naturally on narrow phones. */
+  .bgsu-band.bgsu-campaign .bgsu-poster>strong{font-size:clamp(2rem,9vw,2.7rem)!important}
+  .bgsu-band.bgsu-campaign .bgsu-poster>strong>i{white-space:normal!important}
+
+  /* The directions fallback must remain a complete, tappable label. */
+  body:has(.contactConceptHero) .contactMapFallback .mapCopy{
+    right:24px!important;left:24px!important;bottom:24px!important;
+    max-width:none!important;box-sizing:border-box!important;
+  }
+  body:has(.contactConceptHero) .contactMapFallback .mapCopy strong{
+    white-space:normal!important;overflow-wrap:break-word!important;
+  }
+}
+
+/* V8.6.83 — mobile-first homepage photography.
+   Use purpose-made crops rather than forcing one landscape image to serve a
+   tall phone frame. The vehicle and technician remain the focal point. */
+.hero>.hero-photo{
+  background-image:
+    linear-gradient(90deg,rgba(4,6,5,.92) 0%,rgba(4,6,5,.74) 37%,rgba(4,6,5,.16) 67%,rgba(4,6,5,.05) 100%),
+    url('assets/image-audit/homepage-mechanic-hero-v2.png')!important;
+  background-size:cover!important;
+  background-position:center right!important;
+}
+@media(max-width:780px){
+  .hero>.hero-photo{
+    background-image:
+      linear-gradient(180deg,rgba(4,6,5,.52) 0%,rgba(4,6,5,.18) 26%,rgba(4,6,5,.12) 100%),
+      linear-gradient(90deg,rgba(4,6,5,.88) 0%,rgba(4,6,5,.64) 48%,rgba(4,6,5,.14) 100%),
+      url('assets/image-audit/homepage-mechanic-hero-mobile-v3.png')!important;
+    background-position:center top!important;
+  }
+  /* The mobile hero ends once the decision is made. Do not leave a second
+     image chapter or a duplicate service chooser beneath its actions. */
+  .hero{
+    min-height:0!important;
+    padding-top:85px!important;
+    padding-bottom:0!important;
+  }
+  .hero>.hero-copy{margin-bottom:0!important}
+  .hero>.service-strip{display:none!important;margin:0!important}
+}
+
+/* BGSU mobile review: keep utility links aligned and text readable. */
+@media(max-width:780px){
+  body>footer .footerBrand{display:block!important}
+  body>footer .footerBrand img{display:none!important}
+  body>footer .footerBrand strong{font-size:.9rem;line-height:1.2;overflow-wrap:normal;word-break:normal}
+  body>footer .footerLinks{
+    display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr));
+    justify-content:stretch!important;align-items:start!important;gap:14px 18px!important;
+  }
+  body>footer .footerLinks a{line-height:1.3}
+  .mobileBar{grid-template-columns:.95fr 1.12fr .93fr!important}
+  .mobileBar .mobileCallCta{
+    background:var(--jt-orange)!important;color:#080909!important;
+    border-right:1px solid #303630!important;
+  }
+  .mobileBar .mobileCall{
+    background:#050706!important;padding-inline:8px!important;white-space:nowrap!important;
+    overflow-wrap:normal!important;letter-spacing:-.02em!important;
+    font-size:clamp(.82rem,3.8vw,1rem)!important;
+  }
+  .mobileBar .mobileDirections{
+    background:#0c100e!important;color:#f7f8f5!important;
+    border-left:1px solid #303630!important;border-right:0!important;
+  }
+}
+@media(max-width:620px){
+  body:has(.campusHero) .studentShopMessage>strong{
+    max-width:none!important;font-size:clamp(1.55rem,7.2vw,2rem)!important;
+    line-height:1.04!important;white-space:normal!important;
+    overflow-wrap:normal!important;word-break:normal!important;hyphens:none!important;
+  }
+  .studentSafety .safetyMark{
+    display:grid;place-items:center;justify-self:start;
+    width:96px;height:96px;font-size:5rem;line-height:1;text-align:center;
+  }
+}
+/* Call-first conversion panels replace the temporary email-request forms. */
+.serviceCallPanel{
+  align-self:center;
+  max-width:38rem;
+  padding:clamp(28px,4vw,48px);
+  border:1px solid #4a584d;
+  border-top:4px solid var(--jt-lime);
+  background:linear-gradient(135deg,#121914,#080b09);
+  box-shadow:0 20px 42px rgba(0,0,0,.2);
+}
+.serviceCallPanel>span{
+  display:block;
+  margin-bottom:11px;
+  color:var(--jt-lime);
+  font:800 .72rem/1 var(--font-display,Arial,sans-serif);
+  letter-spacing:.16em;
+}
+.serviceCallPanel>strong{display:block;font-size:clamp(1.5rem,3.1vw,2.5rem);line-height:1.02}
+.serviceCallPanel>p{max-width:38rem;margin:16px 0 24px}
+.serviceCallPanel .cta{width:100%;text-align:center}
+.serviceCallPanel>small{display:block;margin-top:14px;color:#bfc8c0;font-size:.78rem}
+@media(max-width:780px){
+  .serviceCallPanel{padding:28px 24px}
+  .serviceCallPanel>strong{font-size:clamp(1.35rem,7vw,1.9rem)}
+}
+
+/* Homepage mobile services: show a technician and open engine bay, rather
+   than a tire-detail crop. */
+@media(max-width:780px){
+  body:has(.hero) .service-intro .service-image{
+    background-image:url('assets/image-audit/homepage-service-engine-mobile-v1.png')!important;
+    background-position:center 46%!important;
+    background-size:cover!important;
+    min-height:300px!important;
+  }
+}
+
+/* On phones, Services is a compact trigger inside the expanded navigation,
+   not a full-width bar with its plus stranded at the far edge. */
+@media(max-width:780px){
+  .top nav .servicesNavButton{
+    width:max-content!important;
+    min-height:42px!important;
+    justify-content:flex-start!important;
+    gap:9px!important;
+    padding:0 12px 0 10px!important;
+    border:1px solid #3a493d!important;
+    border-left:3px solid var(--jt-lime)!important;
+    background:linear-gradient(110deg,#151d17,#0c100d)!important;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 8px 16px rgba(0,0,0,.16)!important;
+    font-size:.74rem!important;
+    letter-spacing:.07em!important;
+  }
+  .top nav .servicesNavMark{
+    width:22px!important;height:22px!important;
+    display:grid!important;place-items:center!important;
+    border:1px solid rgba(121,255,0,.55)!important;
+    border-radius:50%!important;
+    background:rgba(121,255,0,.09)!important;
+    line-height:1!important;
+  }
+  .top nav .navServices.menu-open .servicesNavButton{
+    border-color:var(--jt-lime)!important;
+    background:linear-gradient(110deg,#1b281d,#101612)!important;
+    box-shadow:inset 0 0 0 1px rgba(121,255,0,.12),0 10px 18px rgba(0,0,0,.2)!important;
+  }
+  .top nav .navServices.menu-open .servicesMenu{
+    margin-top:9px!important;
+    border-color:#3b4c3e!important;
+    border-top:3px solid var(--jt-lime)!important;
+    background:linear-gradient(135deg,#101611,#080b09)!important;
+    box-shadow:0 16px 30px rgba(0,0,0,.28)!important;
+  }
+  .top nav .navServices.menu-open .servicesMenuIntro{
+    background:linear-gradient(120deg,#182319,#101511)!important;
+  }
+}
+
+/* About proof points need a reading order, not three miniature columns. */
+@media(max-width:760px){
+  body:has(.aboutConceptPage) .aboutProofBand{
+    grid-template-columns:minmax(0,1fr)!important;
+    padding:36px 24px!important;
+  }
+  body:has(.aboutConceptPage) .aboutProofBand>div{
+    min-width:0;min-height:0;padding:24px 0!important;
+    border-right:0!important;border-bottom:1px solid #c7ccc5;
+  }
+  body:has(.aboutConceptPage) .aboutProofBand>div:first-child{padding-top:0!important}
+  body:has(.aboutConceptPage) .aboutProofBand .aboutFind{border-bottom:0;padding-bottom:0!important}
+  body:has(.aboutConceptPage) .aboutProofBand :is(h2,h3,strong,span,a){
+    overflow-wrap:normal;word-break:normal;hyphens:none;
+  }
+  body:has(.aboutConceptPage) .aboutProofLead h2{font-size:clamp(2rem,9vw,2.8rem);line-height:1}
+  body:has(.aboutConceptPage) .aboutRating strong{font-size:clamp(3.6rem,18vw,5rem);line-height:1}
+  body:has(.aboutConceptPage) .aboutFind h3{font-size:clamp(1.9rem,8vw,2.5rem)}
+}

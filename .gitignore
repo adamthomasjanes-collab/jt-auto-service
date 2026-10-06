@@ -1,0 +1,9 @@
+# Historical exports stay local; the active source files are versioned.
+*.zip
+jt-v8-6-67-flat/
+
+# Local tooling noise
+__pycache__/
+*.py[cod]
+.DS_Store
+Thumbs.db
